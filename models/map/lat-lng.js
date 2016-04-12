@@ -1,6 +1,6 @@
 'use strict';
 
-export const LatLng = Astro.Class({
+export default Astro.Class({
   name: 'LatLng',
   fields: {
     lat: {

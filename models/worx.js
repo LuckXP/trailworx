@@ -1,14 +1,14 @@
 'use strict';
 
-import {Worxs} from './collections';
-import {RiverAccess, RiverInstrument} from './data';
-import {MapOptions} from './map/map';
+import {Worxs} from './collections'
+import LatLng from './map/lat-lng'
 
 export default Astro.Class({
   name: 'Worx',
   collection: Worxs,
   fields: {
   	location: {
-  		lat: 'required,string',
-  		lng: 'required,string'
-  	}
+      type: 'object',
+      nested: 'LatLng',
+      simpleValidator: 'required'
+    }
