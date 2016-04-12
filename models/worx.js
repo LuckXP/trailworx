@@ -11,4 +11,19 @@ export default Astro.Class({
       type: 'object',
       nested: 'LatLng',
       simpleValidator: 'required'
+    },
+    pictures: {
+    	type: Array,
+
+
+    },
+    description : {
+
+    },
+    categoryId: {
+
+    },
+    authorized: {
+    	type: Boolean,
     }
+
