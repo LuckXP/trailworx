@@ -2,6 +2,7 @@
 
 import {Worxs} from './collections'
 import LatLng from './map/lat-lng'
+import Image from './util/image'
 
 export default Astro.Class({
   name: 'Worx',
@@ -12,18 +13,49 @@ export default Astro.Class({
       nested: 'LatLng',
       simpleValidator: 'required'
     },
+
     pictures: {
-    	type: Array,
-
-
+    	type: 'array',
+      nested: 'Image',
+      simpleValidator: 'required',
+      default: () => []
     },
-    description : {
 
+    description: {
+      type: 'string',
     },
+
     categoryId: {
+      type: 'string',
+      simpleValidator: 'required' 
+    },
+
+    authorized: {
+    	type: 'boolean',
+      simpleValidator: 'required',
+      default: false
+    },
+
+    creationDate: {
 
     },
-    authorized: {
-    	type: Boolean,
+
+    voteManager: {
+
+    },
+
+    creatorId: {
+
+    },
+
+    active: {
+
+    },
+
+    comments: {
+
     }
+  },
+});
+
 
