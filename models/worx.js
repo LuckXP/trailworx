@@ -7,6 +7,7 @@ import Image from './util/image'
 export default Astro.Class({
   name: 'Worx',
   collection: Worxs,
+  behaviors: ['timestamp'],
   fields: {
   	location: {
       type: 'object',
@@ -34,10 +35,6 @@ export default Astro.Class({
     	type: 'boolean',
       simpleValidator: 'required',
       default: false
-    },
-
-    creationDate: {
-
     },
 
     voteManager: {
