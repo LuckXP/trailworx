@@ -1,9 +1,13 @@
 'use strict';
 
 import {Worxs} from './collections'
+import {Categories} from './collections'
+import {Comments} from './collections'
 import LatLng from './map/lat-lng'
 import Image from './util/image'
 import VoteManager from './util/vote-manager'
+import Comment from './comment'
+import Category from './categories'
 
 export default Astro.Class({
   name: 'Worx',
@@ -46,18 +50,23 @@ export default Astro.Class({
 
     voteManager: {
       type: 'object',
-      simpleValidator: 'required'
-      nested: 'VoteManager'
+      simpleValidator: 'required',
+      nested: 'VoteManager',
       default: () => new VoteManager()
     },
 
-    active: {
-
+    comments: {
+      type: 'array',
+      nested: 'Comment',
+      simpleValidator: 'required',
+      default: () => []
     },
 
-    comments: {
-
+    active: {
+      type: 'boolean',
+      simpleValidator: 'required'
     }
+
   },
 });
 
