@@ -3,6 +3,7 @@
 import {Worxs} from './collections'
 import LatLng from './map/lat-lng'
 import Image from './util/image'
+import VoteManager from './util/vote-manager'
 
 export default Astro.Class({
   name: 'Worx',
@@ -13,6 +14,17 @@ export default Astro.Class({
       type: 'object',
       nested: 'LatLng',
       simpleValidator: 'required'
+    },
+
+    categoryId: {
+      type: 'string',
+      simpleValidator: 'required' 
+    },
+
+    creatorId: {
+      type: 'string',
+      simpleValidator: 'required'
+
     },
 
     pictures: {
@@ -26,11 +38,6 @@ export default Astro.Class({
       type: 'string',
     },
 
-    categoryId: {
-      type: 'string',
-      simpleValidator: 'required' 
-    },
-
     authorized: {
     	type: 'boolean',
       simpleValidator: 'required',
@@ -38,11 +45,10 @@ export default Astro.Class({
     },
 
     voteManager: {
-
-    },
-
-    creatorId: {
-
+      type: 'object',
+      simpleValidator: 'required'
+      nested: 'VoteManager'
+      default: () => new VoteManager()
     },
 
     active: {
