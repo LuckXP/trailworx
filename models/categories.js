@@ -1,21 +1,18 @@
 'use strict';
 
+import {Categories} from './collections'
+
 export default Astro.Class({
-  name: 'Catagory',
-  collections: Catagories,
+  name: 'Category',
+  collections: Categories,
   fields: {
-
-    
-
-    Name: {
+    name: {
     	type: 'string',
     	simpleValidator: 'required'
     },
-
-    Icon: {
+    icon: {
     	type: 'object', //svgs are objects right?
     	simpleValidator: 'required'
     }
-  
   }
 });
