@@ -3,6 +3,7 @@
 import React from 'react';
 import {GoogleMap, Marker} from 'react-google-maps'
 import ScriptjsLoader from 'react-google-maps/lib/async/ScriptjsLoader'
+import mapStyles from '../stylesheets/map-styles'
 
 export default (props) => {
   return (
@@ -27,8 +28,9 @@ export default (props) => {
         <GoogleMap
           defaultZoom={3}
           defaultCenter={{lat: -25.363882, lng: 131.044922}}
+          options={{styles: mapStyles}}
         >
-          <Marker position={ {lat: -25.363882, lng: 131.044922} } onClick={() => alert('💩')} />
+          <Marker position={ {lat: -25.363882, lng: 131.044922} } onClick={() => alert('hello world')} />
         </GoogleMap>
       }
     />
