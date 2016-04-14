@@ -1,20 +1,31 @@
 'use strict';
 
 import React from 'react'
+import { createContainer } from 'meteor/react-meteor-data'
+// import { Geolocation } from 'mdg/geolocation'
 import mapStyles from '../../stylesheets/map-styles'
-import {GoogleMap, Marker} from 'react-google-maps'
+import { GoogleMap, Marker } from 'react-google-maps'
 import MapLoader from './map-loader'
 
-export default () => {
+const mapMeteorToProps = (props) => {
+  return {
+    currentLocation: Geolocation.latLng()
+  }
+}
+
+const WorxMap = (props) => {
+  const { currentLocation } = props
   return (
     <MapLoader>
       <GoogleMap
         defaultZoom={3}
-        defaultCenter={{lat: -25.363882, lng: 131.044922}}
-        options={{styles: mapStyles}}
+        defaultCenter={{ lat: currentLocation.lat, lng: currentLocation.lng }}
+        options={{ styles: mapStyles }}
       >
-        <Marker position={ {lat: -25.363882, lng: 131.044922} } onClick={() => alert('hello world')} />
+        <Marker position={{ lat: currentLocation.lat, lng: currentLocation.lng }} onClick={() => alert('hello world')} />
       </GoogleMap>
     </MapLoader>
   )
 }
+
+export default createContainer(mapMeteorToProps)(WorxMap);
