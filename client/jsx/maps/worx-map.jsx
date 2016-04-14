@@ -2,32 +2,38 @@
 
 import React from 'react'
 import { createContainer } from 'meteor/react-meteor-data'
-// import { Geolocation } from 'mdg/geolocation'
-import mapStyles from '../../stylesheets/map-styles'
+//import { Geolocation } from 'mdg/mobile-packages'
+import styles from '../../stylesheets/map-styles'
 import { GoogleMap, Marker } from 'react-google-maps'
 import MapLoader from './map-loader'
 
 const mapMeteorToProps = (props) => {
-  const currentLocation = Geolocation.latLng();
-  const lat = currentLocation ? currentLocation.lat : 0;
-  const lng = currentLocation ? currentLocation.lng : 0;
-  return {lat, lng};
-}
+  let currentLocation = Geolocation.latLng() || { lat: 0, lng: 0 };
+  return {currentLocation};
+};
 
 const WorxMap = (props) => {
-  const { lat, lng } = props
+  const { currentLocation } = props;
+  let geoMarker;
   return (
     <MapLoader>
       <GoogleMap
-        defaultZoom={3}
-        defaultCenter={{ lat: 0, lng: 0 }}
-        center={{ lat, lng }}
-        options={{ styles: mapStyles }}
+        ref={
+          mapComponent => {
+            if (mapComponent != null) {
+              geoMarker = new GeolocationMarker(googleMapComponent.props.map);
+            }
+          }
+        }
+        defaultZoom={15}
+        center={currentLocation}
+        options={{styles}}
+        onDragstart={() => alert('dragging...')}
       >
-        <Marker position={{ lat, lng }} onClick={() => alert('hello world')} />
+        <Marker position={currentLocation} onClick={() => alert('hello world')} />
       </GoogleMap>
     </MapLoader>
   )
-}
+};
 
 export default createContainer(mapMeteorToProps, WorxMap);
