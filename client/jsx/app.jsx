@@ -1,8 +1,12 @@
 'use strict';
 
 import React from 'react'
-import TestMap from './test-map'
+import WorxMap from './maps/worx-map'
 
 export default () => {
-  return <TestMap />
+  return (
+  <div>
+    <WorxMap />
+  </div>
+  )
 }

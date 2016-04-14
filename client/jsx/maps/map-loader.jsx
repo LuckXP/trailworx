@@ -1,3 +1,4 @@
+import React from 'react'
 import ScriptjsLoader from 'react-google-maps/lib/async/ScriptjsLoader'
 
 export default (props) => {

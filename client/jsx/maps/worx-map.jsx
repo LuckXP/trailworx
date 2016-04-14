@@ -1,5 +1,7 @@
 'use strict';
 
+import React from 'react'
+import mapStyles from '../../stylesheets/map-styles'
 import {GoogleMap, Marker} from 'react-google-maps'
 import MapLoader from './map-loader'
 
