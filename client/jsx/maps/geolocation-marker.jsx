@@ -56,11 +56,11 @@ export default class extends React.Component {
           'draggable': false,
           'flat': true,
           'icon': {
-            'url': 'https://chadkillingsworth.github.io/geolocation-marker/images/gpsloc.png',
+            'url': '/images/geolocation-marker.png',
             'size': new google.maps.Size(34, 34),
-            'scaledSize': new google.maps.Size(17, 17),
+            'scaledSize': new google.maps.Size(22, 22),
             'origin': new google.maps.Point(0, 0),
-            'anchor': new google.maps.Point(8, 8)
+            'anchor': new google.maps.Point(11, 11)
           },
           // This marker may move frequently - don't force canvas tile redraw
           'optimized': false,

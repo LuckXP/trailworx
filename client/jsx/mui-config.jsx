@@ -1,8 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {AppCanvas} from 'material-ui'
-import {getMuiTheme, Colors} from 'material-ui/lib/styles';
+import {getMuiTheme, Colors} from 'material-ui/styles';
 
 class MUIConfig extends React.Component {
   constructor() {
@@ -21,11 +20,7 @@ class MUIConfig extends React.Component {
   configureTheme(t) {}
 
   render() {
-    return (
-      <AppCanvas>
-        {this.props.children}
-      </AppCanvas>
-    )
+    return this.props.children;
   }
 }
 

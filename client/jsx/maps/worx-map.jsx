@@ -11,6 +11,7 @@ import CenterMapButton from './center-map-button'
 
 const mapMeteorToProps = (props) => {
   let currentLocation = Geolocation.latLng() || { lat: 0, lng: 0 };
+  console.log(Geolocation.currentLocation());
   return {currentLocation};
 };
 

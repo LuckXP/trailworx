@@ -2,8 +2,8 @@
 
 import React from 'react';
 import {IconButton} from 'material-ui';
-import {Colors} from 'material-ui/lib/styles';
-import {MapsMyLocation} from 'material-ui/lib/svg-icons';
+import {colors as Colors} from 'material-ui/styles';
+import {MapsMyLocation} from 'material-ui/svg-icons';
 
 export default ({onClick}) => {
   return (
@@ -14,6 +14,9 @@ export default ({onClick}) => {
         top: 10,
         right: 10,
         zIndex: 1,
+        padding: 5,
+        width: 38,
+        height: 38,
         borderRadius: '50%',
         backgroundColor: Colors.faintBlack
       }}
