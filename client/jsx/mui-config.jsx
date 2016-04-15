@@ -4,8 +4,8 @@ import React from 'react';
 import {getMuiTheme, Colors} from 'material-ui/styles';
 
 class MUIConfig extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     const muiTheme = getMuiTheme({});
     this.configureTheme(muiTheme);
     this.state = {muiTheme};
@@ -20,6 +20,7 @@ class MUIConfig extends React.Component {
   configureTheme(t) {}
 
   render() {
+    console.log(this.props.children);
     return this.props.children;
   }
 }

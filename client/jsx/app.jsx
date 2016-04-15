@@ -1,13 +1,18 @@
 'use strict';
 
 import React from 'react'
-import MUIConfig from './mui-config'
+import {MuiThemeProvider} from 'material-ui/styles'
 import WorxMap from './maps/worx-map'
+import Navbar from './navbar/navbar'
 
 export default () => {
+  console.log(Navbar);
   return (
-    <MUIConfig>
-      <WorxMap />
-    </MUIConfig>
+    <MuiThemeProvider>
+      <div>
+        <Navbar />
+        <WorxMap />
+      </div>
+    </MuiThemeProvider>
   )
 };

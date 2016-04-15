@@ -1,6 +1,26 @@
 /* CSS declarations go here */
+body {
+  min-height: 100vh;
+  min-width: 100vw;
+  margin: 0;
+  padding-top: 64px;
+
+}
+
+#react-root {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+#react-root > div {
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
 
 #google-map-container {
-  height: 500px;
-  width: 500px;
+  margin-top: 64px;
+  height: 700px;
+  width: 700px;
 }
