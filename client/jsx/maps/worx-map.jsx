@@ -6,34 +6,64 @@ import { createContainer } from 'meteor/react-meteor-data'
 import styles from '../../stylesheets/map-styles'
 import { GoogleMap, Marker } from 'react-google-maps'
 import MapLoader from './map-loader'
+import GeolocationMarker from './geolocation-marker'
+import CenterMapButton from './center-map-button'
 
 const mapMeteorToProps = (props) => {
   let currentLocation = Geolocation.latLng() || { lat: 0, lng: 0 };
   return {currentLocation};
 };
 
-const WorxMap = (props) => {
-  const { currentLocation } = props;
-  let geoMarker;
-  return (
-    <MapLoader>
-      <GoogleMap
-        ref={
-          mapComponent => {
-            if (mapComponent != null) {
-              geoMarker = new GeolocationMarker(googleMapComponent.props.map);
-            }
-          }
-        }
-        defaultZoom={15}
-        center={currentLocation}
-        options={{styles}}
-        onDragstart={() => alert('dragging...')}
-      >
-        <Marker position={currentLocation} onClick={() => alert('hello world')} />
-      </GoogleMap>
-    </MapLoader>
-  )
-};
+class WorxMap extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      centerOnGeolocation: true
+    }
+  }
+
+  mapOptions() {
+    return {
+      zoomControl: true,
+      mapTypeControl: false,
+      scaleControl: true,
+      streetViewControl: false,
+      rotateControl: false,
+      fullscreenControl: false,
+      styles
+    }
+  }
+
+  handleMapDrag() {
+    this.setState({
+      centerOnGeolocation: false
+    });
+  }
+
+  handleCenterMapButtonClick() {
+    this.setState({
+      centerOnGeolocation: true
+    });
+  }
+
+  render() {
+    const { currentLocation } = this.props;
+    const { centerOnGeolocation } = this.state;
+
+    return (
+      <MapLoader>
+        <GoogleMap
+          defaultZoom={15}
+          center={centerOnGeolocation ? currentLocation : undefined}
+          options={this.mapOptions()}
+          onDragstart={() => this.handleMapDrag()}
+        >
+          <GeolocationMarker />
+          <CenterMapButton onClick={() => this.handleCenterMapButtonClick()} />
+        </GoogleMap>
+      </MapLoader>
+    )
+  }
+}
 
 export default createContainer(mapMeteorToProps, WorxMap);
