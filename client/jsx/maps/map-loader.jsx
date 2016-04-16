@@ -13,7 +13,7 @@ export default (props) => {
       } }
       loadingElement={
         <div>
-          <i className="fa fa-spinner" aria-hidden="true"></i>
+          <i className="fa fa-spinner" aria-hidden="true"/>
         </div>
       }
 

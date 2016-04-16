@@ -16,6 +16,14 @@ standard-minifier-js    # JS minifier run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
+less
+fortawesome:fontawesome
+
+accounts-base
+accounts-facebook
+accounts-google
+accounts-twitter
+
 jagi:astronomy
 jagi:astronomy-validators
 jagi:astronomy-timestamp-behavior
@@ -23,11 +31,6 @@ jagi:astronomy-relations
 jagi:astronomy-simple-validators
 
 react-meteor-data
-
-accounts-base
-accounts-facebook
-accounts-google
-accounts-twitter
 
 mdg:geolocation
 mdg:camera
