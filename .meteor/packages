@@ -17,17 +17,19 @@ es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 jagi:astronomy
-react-meteor-data
-accounts-base
-accounts-facebook
-accounts-google
-accounts-twitter
 jagi:astronomy-validators
 jagi:astronomy-timestamp-behavior
 jagi:astronomy-relations
 jagi:astronomy-simple-validators
-blaze-html-templates
-mdg:geolocation
-mirrorcell:background-geolocation-plus
-ejson
 
+react-meteor-data
+
+accounts-base
+accounts-facebook
+accounts-google
+accounts-twitter
+
+mdg:geolocation
+mdg:camera
+mirrorcell:background-geolocation-plus
+edgee:slingshot

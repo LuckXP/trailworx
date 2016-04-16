@@ -4,7 +4,7 @@ import {Worxs} from './collections'
 import {Categories} from './collections'
 import {Comments} from './collections'
 import LatLng from './map/lat-lng'
-import Image from './util/image'
+import Image from './worx-photo'
 import VoteManager from './util/vote-manager'
 import Comment from './comment'
 import Category from './categories'
@@ -22,7 +22,7 @@ export default Astro.Class({
 
     categoryId: {
       type: 'string',
-      simpleValidator: 'required' 
+      simpleValidator: 'required'
     },
 
     creatorId: {
@@ -31,15 +31,15 @@ export default Astro.Class({
 
     },
 
-    pictures: {
+    photos: {
     	type: 'array',
-      nested: 'Image',
+      nested: 'WorxPhoto',
       simpleValidator: 'required',
       default: () => []
     },
 
     description: {
-      type: 'string',
+      type: 'string'
     },
 
     authorized: {
@@ -66,8 +66,7 @@ export default Astro.Class({
       type: 'boolean',
       simpleValidator: 'required'
     }
-
-  },
+  }
 });
 
 

@@ -1,9 +1,9 @@
 'use strict';
 
-import React from 'react';
-import {IconButton} from 'material-ui';
-import {colors as Colors} from 'material-ui/styles';
-import {MapsMyLocation} from 'material-ui/svg-icons';
+import React from 'react'
+import {IconButton} from 'material-ui'
+import {colors as Colors} from 'material-ui/styles'
+import {MapsMyLocation} from 'material-ui/svg-icons'
 
 export default ({onClick}) => {
   return (
