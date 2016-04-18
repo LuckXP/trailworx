@@ -5,9 +5,10 @@ import { createContainer } from 'meteor/react-meteor-data'
 //import { Geolocation } from 'mdg/mobile-packages'
 import styles from '../../stylesheets/map-styles'
 import { GoogleMap, Marker } from 'react-google-maps'
-import MapLoader from './map-loader'
-import GeolocationMarker from './geolocation-marker'
-import CenterMapButton from './center-map-button'
+import MapLoader from '../maps/map-loader'
+import GeolocationMarker from '../maps/geolocation-marker'
+import CenterMapButton from '../maps/center-map-button'
+import NewWorxManager from './new-worx-manager'
 
 const mapMeteorToProps = (props) => {
   let currentLocation = Geolocation.latLng() || { lat: 0, lng: 0 };
@@ -52,17 +53,20 @@ class WorxMap extends React.Component {
     const { centerOnGeolocation } = this.state;
 
     return (
-      <MapLoader>
-        <GoogleMap
-          defaultZoom={15}
-          center={centerOnGeolocation ? currentLocation : undefined}
-          options={this.mapOptions()}
-          onDragstart={() => this.handleMapDrag()}
-        >
-          <GeolocationMarker />
-          <CenterMapButton onClick={() => this.handleCenterMapButtonClick()} />
-        </GoogleMap>
-      </MapLoader>
+      <div id="worx-map">
+        <MapLoader>
+          <GoogleMap
+            defaultZoom={15}
+            center={centerOnGeolocation ? currentLocation : undefined}
+            options={this.mapOptions()}
+            onDragstart={() => this.handleMapDrag()}
+          >
+            <GeolocationMarker />
+            <CenterMapButton onClick={() => this.handleCenterMapButtonClick()} />
+          </GoogleMap>
+        </MapLoader>
+        <NewWorxManager />
+      </div>
     )
   }
 }

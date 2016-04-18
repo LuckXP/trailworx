@@ -6,7 +6,7 @@ import {Comments} from './collections'
 import LatLng from './map/lat-lng'
 import VoteManager from './shared/vote-manager'
 import Comment from './comment'
-import Category from './categories'
+import Category from './category'
 
 export default Astro.Class({
   name: 'Worx',
