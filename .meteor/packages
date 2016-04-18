@@ -35,4 +35,5 @@ react-meteor-data
 mdg:geolocation
 mdg:camera
 mirrorcell:background-geolocation-plus
-edgee:slingshot
+
+vsivsi:file-collection
