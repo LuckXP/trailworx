@@ -5,10 +5,11 @@ import {IconButton} from 'material-ui'
 import {colors as Colors} from 'material-ui/styles'
 import {MapsMyLocation} from 'material-ui/svg-icons'
 
-export default ({onClick}) => {
+const StatelessFunction = ({onClick, disabled}) => {
   return (
     <IconButton
       onClick={onClick}
+      disabled={disabled}
       style={{
         position: 'absolute',
         top: 10,
@@ -25,3 +26,10 @@ export default ({onClick}) => {
     </IconButton>
   )
 };
+
+StatelessFunction.propTypes = {
+  onClick: React.PropTypes.func.isRequired,
+  disabled: React.PropTypes.bool.isRequired
+};
+
+export default StatelessFunction;

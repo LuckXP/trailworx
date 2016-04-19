@@ -62,7 +62,7 @@ class WorxMap extends React.Component {
             onDragstart={() => this.handleMapDrag()}
           >
             <GeolocationMarker />
-            <CenterMapButton onClick={() => this.handleCenterMapButtonClick()} />
+            <CenterMapButton onClick={() => this.handleCenterMapButtonClick()} disabled={centerOnGeolocation} />
           </GoogleMap>
         </MapLoader>
         <NewWorxManager />

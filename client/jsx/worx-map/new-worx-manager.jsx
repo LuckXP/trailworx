@@ -62,4 +62,8 @@ Component.propTypes = {
   userId: React.PropTypes.string
 };
 
+Component.contextTypes = {
+  displayNotification: React.PropTypes.func.isRequired
+};
+
 export default createContainer(mapMeteorToProps, Component);
