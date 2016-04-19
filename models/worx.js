@@ -24,17 +24,9 @@ export default Astro.Class({
       simpleValidator: 'required'
     },
 
-    creatorId: {
+    userId: {
       type: 'string',
       simpleValidator: 'required'
-
-    },
-
-    photos: {
-    	type: 'array',
-      nested: 'WorxPhoto',
-      simpleValidator: 'required',
-      default: () => []
     },
 
     description: {

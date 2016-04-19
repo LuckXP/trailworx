@@ -1,14 +1,28 @@
 import React from 'react'
+import Dialog from 'material-ui/Dialog'
+import RaisedButton from 'material-ui/RaisedButton'
 import CategoryDropDownMenu from './category-drop-down-menu'
 
-const StatelessFunction = (props) => {
+const StatelessFunction = ({open, worx, worxPhoto}) => {
+  if (! open) return null;
+
   return (
-    <CategoryDropDownMenu onCurrentIdChanged={(newId) => this.setState(newId)} />
+    <Dialog
+      open={open}
+      modal={true}
+      title="Add a Worx"
+      actions={[
+
+      ]}
+    >
+      <img src={worxPhoto.uri} width="100%"/>
+      <CategoryDropDownMenu onCurrentIdChanged={(newId) => console.log(newId)} />
+    </Dialog>
   );
 };
 
 StatelessFunction.propTypes = {
-
+  open: React.PropTypes.bool.isRequired
 };
 
 export default StatelessFunction;

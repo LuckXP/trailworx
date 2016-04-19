@@ -8,7 +8,7 @@ const mapMeteorToProps = ({currentCategoryId, onCategoryIdChanged}) => {
   const items = categories.map( ({_id, name}) => ({_id, displayText: name}) );
 
   return {
-    defaultPrimaryText: '-- Worx Category --',
+    initialText: '-- Worx Category --',
     items
   }
 };

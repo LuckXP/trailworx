@@ -8,32 +8,31 @@ class Component extends React.Component {
     this.state = {
       currentItemId: props.currentItemId
     };
-    console.log('drop-down-menu');
-    console.log(props);
   }
 
-  onMenuItemChange(newId) {
-    this.setState({
-      currentItemId: newId
-    });
-    this.props.onCurrentIdChanged(newId);
+  onItemChange(newId) {
+    if (newId) {
+      this.setState({
+        currentItemId: newId
+      });
+      this.props.onCurrentIdChanged(newId);
+    }
   }
 
   render() {
-    const {defaultPrimaryText, items} = this.props;
+    const {initialText, items} = this.props;
     const {currentItemId} = this.state;
     const menuItems = items.map(item => <MenuItem key={item._id} value={item._id} primaryText={item.displayText} />);
 
-    if (defaultPrimaryText) {
-      menuItems.unshift(<MenuItem value={null} primaryText={defaultPrimaryText} />);
+    if (initialText) {
+      menuItems.unshift(<MenuItem key="null" value={null} primaryText={initialText} />);
     }
 
     return (
       <SelectField
-        disabled={false}
         value={currentItemId}
-        onChange={(event, index, value) => this.onMenuItemChange(value)}
-        style={{position: 'absolute', top: 200, zIndex: 10000}}
+        onChange={(event, index, value) => this.onItemChange(value)}
+        style={{width: '100%'}}
       >
         {menuItems}
       </SelectField>
@@ -42,7 +41,7 @@ class Component extends React.Component {
 }
 
 Component.propTypes = {
-  defaultPrimaryText: React.PropTypes.string,
+  initialText: React.PropTypes.string,
   currentItemId: React.PropTypes.string,
   items: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
   onCurrentIdChanged: React.PropTypes.func.isRequired

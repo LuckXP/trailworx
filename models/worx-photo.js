@@ -16,11 +16,23 @@ export default Astro.Class({
     md5: {
       type: 'string',
       simpleValidator: 'required'
+    },
+    uri: {
+      type: 'string',
+      transient: true
     }
   },
   methods: {
-    url() {
-      return '/gridfs/worx-photos/' + this.md5;
+    setDataUri(dataUrl) {
+      this.set('uri', dataUrl);
+    }
+  },
+  events: {
+    afterInit() {
+      this.set('uri', '/gridfs/worx-photos/' + this.md5);
+    },
+    afterSave() {
+      this.set('uri', '/gridfs/worx-photos/' + this.md5);
     }
   }
 });
