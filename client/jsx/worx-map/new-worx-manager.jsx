@@ -67,6 +67,7 @@ class Component extends React.Component {
 
     worxPhoto.set('_id', file.uniqueIdentifier);
     worxPhoto.set('worxId', worx._id);
+    worxPhoto.set('contentType', file.file.type);
     worxPhoto.save((err, id) => {
       if (err) {
         console.log(err);

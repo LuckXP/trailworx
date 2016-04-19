@@ -12,7 +12,6 @@ class Component extends React.Component {
 
   onWorxPropertyChanged(propertyName, newValue) {
     this.props.worx.set(propertyName, newValue);
-    console.log(this.props.worx);
     this.forceUpdate();
   }
 
@@ -26,8 +25,6 @@ class Component extends React.Component {
     if(!open) {
       return null;
     }
-
-    console.log(worx.getValidationErrors());
 
     return (
       <Dialog

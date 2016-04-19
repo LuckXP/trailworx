@@ -23,6 +23,24 @@ export default Astro.Class({
     },
     metadata: {
       type: 'object'
+    },
+    length: {
+      type: 'number'
+    },
+    chunkSize: {
+      type: 'number'
+    },
+    uploadDate: {
+      type: 'date'
+    },
+    filename: {
+      type: 'string'
+    },
+    contentType: {
+      type: 'string'
+    },
+    aliases: {
+      type: 'array'
     }
   },
   methods: {

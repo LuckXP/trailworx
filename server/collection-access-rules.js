@@ -14,7 +14,6 @@ Meteor.startup(() => {
       return true;
     },
     write(userId, file, fields) {
-      console.log(file);
       return (userId === file.metadata.owner);
     }
   });

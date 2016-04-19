@@ -12,6 +12,7 @@ export default () => {
       <NotificationBar>
         <Navbar />
         <WorxMap />
+        <img src="/gridfs/worx-photos/d41d8cd98f00b204e9800998ecf8427e" />
       </NotificationBar>
     </MuiThemeProvider>
   )
