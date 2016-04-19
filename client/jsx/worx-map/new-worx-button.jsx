@@ -6,19 +6,21 @@ import ImageAddAPhoto from 'material-ui/svg-icons/image/add-a-photo'
 
 const mapMeteorToProps = () => {
   return {
-    loggedIn: true //Meteor.userId() != null
+    loggedIn: true, //Meteor.userId() != null
+    hasLocation: Geolocation.latLng() != null
   }
 };
 
-const StatelessFunction = ({loggedIn, onClick}) => {
+const StatelessFunction = ({loggedIn, hasLocation, onClick}) => {
   return (
-    <FloatingActionButton disabled={! loggedIn} onClick={onClick} style={{position: 'absolute', right: 20, bottom: 100}}>
+    <FloatingActionButton disabled={! loggedIn || ! hasLocation} onClick={onClick} style={{position: 'absolute', right: 20, bottom: 100}}>
       <ImageAddAPhoto />
     </FloatingActionButton>
   )
 };
 
 StatelessFunction.propTypes = {
+  hasLocation: React.PropTypes.bool.isRequired,
   loggedIn: React.PropTypes.bool.isRequired,
   onClick: React.PropTypes.func.isRequired
 };

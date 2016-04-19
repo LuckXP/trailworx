@@ -30,15 +30,10 @@ export default Astro.Class({
     },
 
     description: {
-      type: 'string'
+      type: 'string',
+      default: ''
     },
-
-    authorized: {
-    	type: 'boolean',
-      simpleValidator: 'required',
-      default: false
-    },
-
+    
     voteManager: {
       type: 'object',
       simpleValidator: 'required',
@@ -55,7 +50,8 @@ export default Astro.Class({
 
     active: {
       type: 'boolean',
-      simpleValidator: 'required'
+      simpleValidator: 'required',
+      default: true
     }
   }
 });

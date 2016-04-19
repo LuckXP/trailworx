@@ -14,5 +14,3 @@ export const WorxPhotos = new FileCollection('worx-photos', {
     lookup: params => ({ md5: params.md5 })
   } ]
 });
-
-//Media.resumable.addFile(myBlob); // My file collection name is Media

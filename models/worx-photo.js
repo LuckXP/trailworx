@@ -20,6 +20,9 @@ export default Astro.Class({
     uri: {
       type: 'string',
       transient: true
+    },
+    metadata: {
+      type: 'object'
     }
   },
   methods: {
@@ -29,9 +32,6 @@ export default Astro.Class({
   },
   events: {
     afterInit() {
-      this.set('uri', '/gridfs/worx-photos/' + this.md5);
-    },
-    afterSave() {
       this.set('uri', '/gridfs/worx-photos/' + this.md5);
     }
   }
