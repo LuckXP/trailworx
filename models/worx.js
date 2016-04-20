@@ -53,6 +53,19 @@ export default Astro.Class({
       simpleValidator: 'required',
       default: true
     }
+  },
+  relations: {
+    getWorxPhotos: {
+      type: 'many',
+      class: 'WorxPhoto',
+      local: '_id',
+      foreign: 'metadata.worxId'
+    }
+  },
+  events: {
+    beforeRemove() {
+      this.getWorxPhotos().fetch().forEach(photo => photo.remove());
+    }
   }
 });
 

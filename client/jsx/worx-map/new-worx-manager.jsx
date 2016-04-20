@@ -20,7 +20,7 @@ class Component extends React.Component {
     super(props, context);
     this.state = {
       worx: null,
-      worxPhoto: null,
+      pictureURI: null,
       dialogOpen: false
     };
   }
@@ -58,7 +58,7 @@ class Component extends React.Component {
     });
   }
 
-  saveNewWorxPhoto(file) {
+  saveNewWorxPhoto(resumableFile) {
     const {userId} = this.props;
     const {_id: worxId} = this.state.worx;
     const {displayNotification} = this.context;
@@ -66,8 +66,8 @@ class Component extends React.Component {
     const worxPhoto = new WorxPhoto();
 
     worxPhoto.set({
-      _id: file.uniqueIdentifier,
-      contentType: file.file.type,
+      _id: resumableFile.uniqueIdentifier,
+      contentType: resumableFile.file.type,
       'metadata.userId': userId,
       'metadata.worxId': worxId
     });
