@@ -3,18 +3,17 @@ import {WorxPhotos} from '../models/collections'
 Meteor.startup(() => {
   WorxPhotos.allow({
     insert(userId, file) {
-      file.metadata = file.metadata || {};
-      file.metadata.owner = userId;
+      file.metadata.userId = userId;
       return true;
     },
     remove(userId, file) {
-      return (userId === file.metadata.owner);
+      return (userId === file.metadata.userId);
     },
     read(userId, file) {
       return true;
     },
-    write(userId, file, fields) {
-      return (userId === file.metadata.owner);
+    write(userId, file) {
+      return (userId === file.metadata.userId);
     }
   });
 });

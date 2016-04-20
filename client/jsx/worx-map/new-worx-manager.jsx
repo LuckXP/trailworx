@@ -29,17 +29,14 @@ class Component extends React.Component {
     const {userId} = this.props;
 
     this.setState({
-      worx: new Worx({userId, location: Geolocation.latLng()}),
-      worxPhoto: new WorxPhoto({userId})
+      worx: new Worx({userId, location: Geolocation.latLng()})
     });
 
     getPicture().then(pictureURI => {
-      this.state.worxPhoto.setDataUri(pictureURI);
       this.setState({
         dialogOpen: true,
         pictureURI: pictureURI
       });
-      console.log(this.state);
     }).catch(error => {
       this.cancelNewWorx();
     });
@@ -50,10 +47,11 @@ class Component extends React.Component {
     const {displayNotification} = this.context;
 
     this.setState({dialogOpen: false});
-    worx.save((err) => {
-      if (err) {
-        console.log(err);
-        displayNotification('There was an error saving your worx.');
+    worx.save((error) => {
+      if (error) {
+        this.cancelNewWorx();
+        console.log(error);
+        displayNotification('There was an error creating your new Worx.');
         return;
       }
       WorxPhotos.resumable.addFile(dataURItoBlob(pictureURI));
@@ -61,49 +59,65 @@ class Component extends React.Component {
   }
 
   saveNewWorxPhoto(file) {
-    console.log(file);
-    const {worx, worxPhoto} = this.state;
+    const {userId} = this.props;
+    const {_id: worxId} = this.state.worx;
     const {displayNotification} = this.context;
 
-    worxPhoto.set('_id', file.uniqueIdentifier);
-    worxPhoto.set('worxId', worx._id);
-    worxPhoto.set('contentType', file.file.type);
-    worxPhoto.save((err, id) => {
-      if (err) {
-        console.log(err);
-        displayNotification('There was an error saving your worx photo.');
+    const worxPhoto = new WorxPhoto();
+
+    worxPhoto.set({
+      _id: file.uniqueIdentifier,
+      contentType: file.file.type,
+      'metadata.userId': userId,
+      'metadata.worxId': worxId
+    });
+
+    worxPhoto.save(error => {
+      if (error) {
+        this.cancelNewWorx();
+        console.log(error);
+        displayNotification('There was an error creating your new Worx');
         return;
       }
+
       WorxPhotos.resumable.upload();
     });
   }
 
-  componentDidMount() {
-    WorxPhotos.resumable.on( 'fileAdded', (file) => this.saveNewWorxPhoto(file) );
-  }
-
   cancelNewWorx() {
+    this.state.worx.remove();
     this.setState({
-      pictureURI: null,
       dialogOpen: false,
-      worx: null,
-      worxPhoto: null
+      pictureURI: null,
+      worx: null
     });
   }
 
+  componentDidMount() {
+    const {displayNotification} = this.context;
+    WorxPhotos.resumable.on( 'fileAdded', file => this.saveNewWorxPhoto(file) );
+    WorxPhotos.resumable.on( 'fileSuccess', () => displayNotification('Your new Worx was successfully added.') );
+    WorxPhotos.resumable.on( 'fileError', (_, message) => {
+      this.cancelNewWorx();
+      console.log(message);
+      displayNotification('There was an error creating your new Worx.')
+    });
+  }
 
   render() {
-    const {dialogOpen, worx, worxPhoto} = this.state;
+    const {dialogOpen, worx, pictureURI} = this.state;
+    const newWorxDialog = dialogOpen ? <NewWorxDialog
+      open={dialogOpen}
+      worx={worx}
+      pictureURI={pictureURI}
+      onCancel={ () => this.cancelNewWorx() }
+      onDone={ () => this.saveNewWorx() }
+    /> : null;
+
     return (
       <div id="new-worx-manager">
         <NewWorxButton onClick={ () => this.createNewWorx() } />
-        <NewWorxDialog 
-          open={dialogOpen} 
-          worx={worx} 
-          worxPhoto={worxPhoto} 
-          onCancel={ () => this.cancelNewWorx() } 
-          onDone={ () => this.saveNewWorx() }
-        />
+        {newWorxDialog}
       </div>
     )
   }

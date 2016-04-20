@@ -21,10 +21,7 @@ class Component extends React.Component {
   }
 
   render() {
-    const {open, worx, worxPhoto, onDone, onCancel} = this.props;
-    if(!open) {
-      return null;
-    }
+    const {open, worx, pictureURI, onDone, onCancel} = this.props;
 
     return (
       <Dialog
@@ -32,26 +29,24 @@ class Component extends React.Component {
         modal={true}
         title="Add a Worx"
         actions={[
-
-      ]}
+          <RaisedButton label="Done" disabled={this.isDoneDisabled()} onClick={ onDone }/>,
+          <RaisedButton label="Cancel" onClick={ onCancel } />
+        ]}
       >
-        <img src={worxPhoto.uri} height="300px"/>
+        <img src={pictureURI} height="300px"/>
         <CategoryDropDownMenu onCurrentIdChanged={newId => this.onWorxPropertyChanged('categoryId', newId)} />
         <TextField hintText="Description" value={worx.description} onChange={event => this.onWorxPropertyChanged('description', event.target.value)} />
-        <br />
-        <RaisedButton label="Done" disabled={this.isDoneDisabled()} onClick={ onDone }/>
-        <RaisedButton label="Cancel" onClick={ onCancel } />
       </Dialog>
     );
   }
 }
 
 Component.propTypes = {
-  worxPhoto: React.PropTypes.object.isRequired,
-  worx: React.PropTypes.object.isRequired,
   open: React.PropTypes.bool.isRequired,
+  worx: React.PropTypes.object.isRequired,
+  pictureURI: React.PropTypes.string.isRequired,
   onDone: React.PropTypes.func.isRequired,
-  onCancel: React.PropTypes.func.isRequired,
+  onCancel: React.PropTypes.func.isRequired
 };
 
 export default Component;

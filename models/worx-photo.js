@@ -3,26 +3,18 @@ import {WorxPhotos} from './collections'
 export default Astro.Class({
   name: 'WorxPhoto',
   collection: WorxPhotos,
-  behaviors: ['timestamp'],
   fields: {
-    userId: {
-      type: 'string',
-      simpleValidator: 'required'
-    },
-    worxId: {
-      type: 'string',
-      simpleValidator: 'required'
-    },
-    md5: {
-      type: 'string',
-      simpleValidator: 'required'
+    metadata: {
+      type: 'object',
+      simpleValidator: 'required',
+      default: () => {}
     },
     uri: {
       type: 'string',
       transient: true
     },
-    metadata: {
-      type: 'object'
+    md5: {
+      type: 'string'
     },
     length: {
       type: 'number'
@@ -43,14 +35,12 @@ export default Astro.Class({
       type: 'array'
     }
   },
-  methods: {
-    setDataUri(dataUrl) {
-      this.set('uri', dataUrl);
-    }
-  },
   events: {
     afterInit() {
-      this.set('uri', '/gridfs/worx-photos/' + this.md5);
+      this.set('uri', '/gridfs/worx-photos/' + this._id);
+    },
+    afterSave() {
+      this.set('uri', '/gridfs/worx-photos/' + this._id);
     }
   }
 });

@@ -13,3 +13,4 @@ App.accessRule('*.google.com/*');
 App.accessRule('*.googleapis.com/*');
 App.accessRule('*.gstatic.com/*');
 
+App.accessRule("blob:*"); // vsivsi:file-collection bug workaround
