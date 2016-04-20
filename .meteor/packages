@@ -23,6 +23,7 @@ accounts-base
 accounts-facebook
 accounts-google
 accounts-twitter
+service-configuration
 
 jagi:astronomy
 jagi:astronomy-validators

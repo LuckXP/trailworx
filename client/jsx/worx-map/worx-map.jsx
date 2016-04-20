@@ -55,7 +55,7 @@ class WorxMap extends React.Component {
     const { currentLocation, worxs } = this.props;
     const { centerOnGeolocation } = this.state;
 
-    const worxMarkers = worxs.map( worx => <Marker position={ worx.location} />);
+    const worxMarkers = worxs.map( worx => <Marker position={ worx.location} onClick={() => alert('you clicked me')} />);
     return (
       <div id="worx-map">
         <MapLoader>
