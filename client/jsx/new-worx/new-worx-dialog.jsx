@@ -1,7 +1,7 @@
 import React from 'react'
 import Dialog from 'material-ui/Dialog'
 import RaisedButton from 'material-ui/RaisedButton'
-import CategoryDropDownMenu from './category-drop-down-menu'
+import CategoryDropDownMenu from './../shared/category-drop-down-menu'
 import TextField from 'material-ui/TextField'
 
 class Component extends React.Component {

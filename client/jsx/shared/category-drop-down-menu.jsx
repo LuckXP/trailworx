@@ -1,7 +1,7 @@
 import React from 'react'
 import {createContainer} from 'meteor/react-meteor-data'
 import Category from '../../../models/category'
-import DropDownMenu from '../shared/drop-down-menu'
+import DropDownMenu from './drop-down-menu'
 
 const mapMeteorToProps = ({currentCategoryId, onCategoryIdChanged}) => {
   const categories = Category.find().fetch();

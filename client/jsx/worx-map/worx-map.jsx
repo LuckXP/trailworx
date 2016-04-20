@@ -8,12 +8,15 @@ import { GoogleMap, Marker } from 'react-google-maps'
 import MapLoader from '../maps/map-loader'
 import GeolocationMarker from '../maps/geolocation-marker'
 import CenterMapButton from '../maps/center-map-button'
-import NewWorxManager from './new-worx-manager'
+import NewWorxManager from './../new-worx/new-worx-manager'
+import Worx from '../../../models/worx'
+
 
 const mapMeteorToProps = (props) => {
-  let currentLocation = Geolocation.latLng() || { lat: 0, lng: 0 };
-  console.log(Geolocation.currentLocation());
-  return {currentLocation};
+  return {
+    currentLocation: Geolocation.latLng() || { lat: 0, lng: 0 },
+    worxs: Worx.find().fetch()
+  };
 };
 
 class WorxMap extends React.Component {
@@ -49,9 +52,10 @@ class WorxMap extends React.Component {
   }
 
   render() {
-    const { currentLocation } = this.props;
+    const { currentLocation, worxs } = this.props;
     const { centerOnGeolocation } = this.state;
 
+    const worxMarkers = worxs.map( worx => <Marker position={ worx.location} />);
     return (
       <div id="worx-map">
         <MapLoader>
@@ -61,6 +65,7 @@ class WorxMap extends React.Component {
             options={this.mapOptions()}
             onDragstart={() => this.handleMapDrag()}
           >
+            {worxMarkers}
             <GeolocationMarker />
             <CenterMapButton onClick={() => this.handleCenterMapButtonClick()} disabled={centerOnGeolocation} />
           </GoogleMap>
