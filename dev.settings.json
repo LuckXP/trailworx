@@ -1,0 +1,16 @@
+{
+  "loginServices": {
+    "facebook": {
+      "appId": "1523646774610120",
+      "secret": "9afe6d88710764bc268936ff45e95812"
+    },
+    "google": {
+      "clientId": "72435286511-bhuvatgrfq0oigbm2sgflqq85scc4ck0.apps.googleusercontent.com",
+      "secret": "zhojSfQFKNQNYEYUru_yx2MH"
+    },
+    "twitter": {
+      "consumerKey": "SRvOfNH5BAuG9Rk0hXNT85A3j",
+      "secret": "nn8zdvUPTHwWn01YngheopZeD5XpgqEU3wXToapoZBIF6os4N6"
+    }
+  }
+}
