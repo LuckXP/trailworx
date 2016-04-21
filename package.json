@@ -2,7 +2,8 @@
   "name": "trail-worx",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run --settings dev.settings.json",
+    "mup": "mupx deploy --settings mup.settings.json"
   },
   "dependencies": {
     "material-ui": "^0.15.0-beta.1",
@@ -11,6 +12,7 @@
     "react-addons-pure-render-mixin": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-google-maps": "^4.9.1",
+    "react-helmet": "^3.0.2",
     "react-mounter": "^1.2.0",
     "react-redux": "^4.4.5",
     "react-tap-event-plugin": "^1.0.0",
