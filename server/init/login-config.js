@@ -41,8 +41,18 @@ Meteor.startup(() => {
   );
 
   Accounts.onCreateUser(function(options, user) {
-    if (user.services && user.services.facebook) {
-      user.services.facebook.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
+    const {services} = user;
+
+    if (services) {
+      user.profile = user.profile || {};
+
+      if (services.facebook) {
+        user.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
+      } else if (services.twitter) {
+        user.profile.picture = services.twitter.profile_image_url_https;
+      } else if (services.google) {
+        user.profile.picture = services.google.picture;
+      }
     }
 
     if (options.profile) {
