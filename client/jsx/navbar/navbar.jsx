@@ -49,5 +49,9 @@ class Component extends React.Component {
   }
 }
 
+Component.contextTypes = {
+  displayNotification: React.PropTypes.func.isRequired
+};
+
 export default createContainer(mapMeteorToProps, Component);
 
