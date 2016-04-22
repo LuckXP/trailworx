@@ -2,6 +2,9 @@ import React from 'react'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import {Meteor} from 'meteor/meteor'
+import LoginFacebook from '../shared/login-facebook'
+import LoginTwitter from '../shared/login-twitter'
+import LoginGoogle from '../shared/login-google'
 
 
 class Component extends React.Component {
@@ -22,10 +25,27 @@ class Component extends React.Component {
   }
   render() {
     return (
-      <Dialog open={this.props.open} actions={ <FlatButton label="close" onClick={ this.props.closeLoginDialog }/> }>
-        <FlatButton label="Facebook" onClick={ () => Meteor.loginWithFacebook( (err) => this.loginCallBack(err) ) }/>
-        <FlatButton label="Google" onClick={ () => Meteor.loginWithGoogle( (err) => this.loginCallBack(err) ) }/>
-        <FlatButton label="Twitter" onClick={ () => Meteor.loginWithTwitter( (err) => this.loginCallBack(err) ) }/>
+      <Dialog
+        open={this.props.open}
+        actions={ <FlatButton label="close"
+        onClick={ this.props.closeLoginDialog }/> }
+        style={{
+          display: "flex",
+          justifyContent: "center"
+         
+        }}
+      >
+        <div>
+          <LoginFacebook onClick={ () => Meteor.loginWithFacebook( (err) => this.loginCallBack(err) ) }/>
+        </div>
+        <br/>
+        <div>
+          <LoginGoogle onClick={ () => Meteor.loginWithGoogle( (err) => this.loginCallBack(err) ) }/>
+        </div>
+        <br/>
+        <div>
+          <LoginTwitter onClick={ () => Meteor.loginWithTwitter( (err) => this.loginCallBack(err) ) }/>
+        </div>
       </Dialog>
     )
   }
