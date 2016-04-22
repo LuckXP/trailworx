@@ -28,14 +28,12 @@ class Component extends React.Component {
     } else {
       displayNotification('You logged out.');
     }
-    this.props.closeLoginDialog();
-
   }
 
   render() {
     const userName = this.props.userName;
     const signIn = <FlatButton label="Sign In" onClick={ () => this.setState({ loginDialogOpen: true }) } />;
-    const signOut = <FlatButton label={ "Sign Out " + userName } onClick={ () => Meteor.logout( (err) => logOutCallBack(err) ) } />;
+    const signOut = <FlatButton label={ "Sign Out " + userName } onClick={ () => Meteor.logout( (err) => this.logOutCallBack(err) ) } />;
     const correctButton = !this.props.loggedIn ? signIn : signOut;
     return (
       <div>
