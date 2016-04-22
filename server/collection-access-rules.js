@@ -13,6 +13,7 @@ Meteor.startup(() => {
       return true;
     },
     write(userId, file) {
+      console.log(userId, file.metadata.userId);
       return (userId === file.metadata.userId);
     }
   });
