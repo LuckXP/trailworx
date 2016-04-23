@@ -60,6 +60,13 @@ export default Astro.Class({
       class: 'WorxPhoto',
       local: '_id',
       foreign: 'metadata.worxId'
+    },
+    
+    getCategory: {
+      type: 'one',
+      class: 'Category',
+      local: 'categoryId',
+      foreign: '_id'
     }
   },
   events: {
