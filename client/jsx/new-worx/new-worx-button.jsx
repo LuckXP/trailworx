@@ -6,7 +6,7 @@ import ImageAddAPhoto from '../../../node_modules/material-ui/svg-icons/image/ad
 
 const mapMeteorToProps = () => {
   return {
-    loggedIn: true, //Meteor.userId() != null
+    loggedIn: Meteor.userId() != null,
     hasLocation: Geolocation.latLng() != null
   }
 };
