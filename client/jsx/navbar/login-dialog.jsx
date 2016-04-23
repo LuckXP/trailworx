@@ -24,16 +24,22 @@ class Component extends React.Component {
 
   }
   render() {
+    const {closeLoginDialog} = this.props;
+
     return (
       <Dialog
         open={this.props.open}
         actions={ <FlatButton label="close"
-        onClick={ this.props.closeLoginDialog }/> }
+        onClick={ closeLoginDialog }/> }
         style={{
+          width: 'auto',
+          margin: 0
+        }}
+        contentStyle={{
           display: "flex",
           justifyContent: "center"
-         
         }}
+        onRequestClose={ closeLoginDialog }
       >
         <div>
           <LoginFacebook onClick={ () => Meteor.loginWithFacebook( (err) => this.loginCallBack(err) ) }/>

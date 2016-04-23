@@ -13,7 +13,8 @@ export const WorxPhotos = new FileCollection('worx-photos', {
     path: '/:_id',  // this will be at route "/gridfs/worx-photos/:md5"
     lookup: params => ({ _id: params._id })
   },
-  { method: 'options',  // Enable an OPTIONS endpoint (for CORS)
+  {
+    method: 'options',  // Enable an OPTIONS endpoint (for CORS)
     path: '/:_id',  // this will be at route "/gridfs/myFiles/:md5"
     lookup: function (params, query) {  // uses express style url params
       return { _id: params._id };       // a query mapping url to myFiles

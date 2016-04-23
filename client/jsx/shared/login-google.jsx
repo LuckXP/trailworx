@@ -1,18 +1,6 @@
 import React from 'react'
-import FlatButton from 'material-ui/FlatButton'
+import LoginButton from './login-button'
 
-const StatelessFunction = (props) => {
-  return <FlatButton
-    style={{
-      backgroundColor: "#f90101",
-      color: "white"
-    }}
-    label={<span> <i className="fa fa-google" aria-hidden="true" />  Sign in with Google </span>}
-    onClick={ props.onClick }/>
-};
-
-StatelessFunction.propTypes = {
-  onClick: React.PropTypes.func.isRequired
-};
-
-export default StatelessFunction;
+export default ({onClick}) => {
+  return <LoginButton onClick={onClick} backgroundColor="#f90101" iconClass="google" serviceName="Google" />;
+}
