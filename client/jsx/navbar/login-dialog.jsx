@@ -1,5 +1,5 @@
 import React from 'react'
-import Dialog from 'material-ui/Dialog'
+import Dialog from '../shared/dialog'
 import FlatButton from 'material-ui/FlatButton'
 import {Meteor} from 'meteor/meteor'
 import LoginFacebook from '../shared/login-facebook'

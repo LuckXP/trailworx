@@ -10,6 +10,7 @@ import GeolocationMarker from '../maps/geolocation-marker'
 import CenterMapButton from '../maps/center-map-button'
 import NewWorxManager from './../new-worx/new-worx-manager'
 import Worx from '../../../models/worx'
+import WorxDetailsManager from '../worx-details/worx-details-manager'
 
 
 const mapMeteorToProps = (props) => {
@@ -23,8 +24,15 @@ class WorxMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      centerOnGeolocation: true
+      centerOnGeolocation: true,
+      currentWorxId: null
     }
+  }
+  
+  onWorxDetailsClose() {
+    this.setState({
+      currentWorxId: null
+    });
   }
 
   mapOptions() {
@@ -53,9 +61,15 @@ class WorxMap extends React.Component {
 
   render() {
     const { currentLocation, worxs } = this.props;
-    const { centerOnGeolocation } = this.state;
+    const { centerOnGeolocation, currentWorxId } = this.state;
 
-    const worxMarkers = worxs.map( worx => <Marker key={worx._id} position={worx.location} onClick={() => alert('you clicked me')} />);
+    const worxMarkers = worxs.map( worx => {
+      return <Marker 
+        key={worx._id} 
+        position={worx.location} 
+        onClick={() => this.setState({ currentWorxId: worx._id })} 
+      />
+    });
     return (
       <div id="worx-map">
         <MapLoader>
@@ -71,6 +85,7 @@ class WorxMap extends React.Component {
           </GoogleMap>
         </MapLoader>
         <NewWorxManager />
+        <WorxDetailsManager worxId={ currentWorxId } onWorxDetailsClose={() => this.onWorxDetailsClose()} />
       </div>
     )
   }
