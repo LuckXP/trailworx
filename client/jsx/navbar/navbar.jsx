@@ -1,13 +1,16 @@
 import React from 'react'
-import {AppBar, FlatButton} from 'material-ui'
+import AppBar from 'material-ui/AppBar'
+import FlatButton from 'material-ui/FlatButton'
 import {Meteor} from 'meteor/meteor'
 import LoginDialog from './login-dialog'
+import UserAvatar from '../shared/user-avatar'
 import {createContainer} from 'meteor/react-meteor-data'
 
 const mapMeteorToProps = props => {
+  const user = Meteor.user();
   return {
-    loggedIn: Meteor.userId() != null,
-    userName: Meteor.user() && Meteor.user().profile && Meteor.user().profile.name
+    loggedIn: user != null,
+    userName: user && user.profile.name
   }
 };
 
@@ -20,7 +23,6 @@ class Component extends React.Component {
   }
 
   logOutCallBack(err) {
-    console.log("called", this)
     const {displayNotification} = this.context;
     if(err) {
       console.log(err);
@@ -33,7 +35,16 @@ class Component extends React.Component {
   render() {
     const userName = this.props.userName;
     const signIn = <FlatButton label="Sign In" onClick={ () => this.setState({ loginDialogOpen: true }) } />;
-    const signOut = <FlatButton label={ "Sign Out " + userName } onClick={ () => Meteor.logout( (err) => this.logOutCallBack(err) ) } />;
+    const signOut = (
+      <FlatButton
+        label="Logout"
+        labelPosition="before"
+        labelStyle={{paddingRight: 8}}
+        onClick={ () => Meteor.logout( (err) => this.logOutCallBack(err) ) }
+      >
+        <UserAvatar />
+      </FlatButton>
+    );
     const correctButton = !this.props.loggedIn ? signIn : signOut;
     return (
       <div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import {default as React, PropTypes} from 'react'
 import {Meteor} from 'meteor/meteor'
 import {createContainer} from 'meteor/react-meteor-data'
 import dataURItoBlob from '../../js/shared/data-uri-to-blob'
@@ -15,7 +15,7 @@ const mapMeteorToProps = () => {
   }
 };
 
-class Component extends React.Component {
+class NewWorxManager extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -43,17 +43,19 @@ class Component extends React.Component {
   }
 
   saveNewWorx() {
+    const {onWorxCreated} = this.props;
     const {worx, pictureURI} = this.state;
     const {displayNotification} = this.context;
 
     this.setState({dialogOpen: false});
-    worx.save((error) => {
+    worx.save((error, id) => {
       if (error) {
         this.cancelNewWorx();
         console.log(error);
         displayNotification('There was an error creating your new Worx.');
         return;
       }
+      onWorxCreated(id);
       WorxPhotos.resumable.addFile(dataURItoBlob(pictureURI));
     });
   }
@@ -123,12 +125,13 @@ class Component extends React.Component {
   }
 }
 
-Component.propTypes = {
-  userId: React.PropTypes.string
+NewWorxManager.propTypes = {
+  userId: PropTypes.string,
+  onWorxCreated: PropTypes.func.isRequired
 };
 
-Component.contextTypes = {
+NewWorxManager.contextTypes = {
   displayNotification: React.PropTypes.func.isRequired
 };
 
-export default createContainer(mapMeteorToProps, Component);
+export default createContainer(mapMeteorToProps, NewWorxManager);

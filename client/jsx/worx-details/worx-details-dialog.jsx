@@ -1,26 +1,34 @@
-import React from 'react'
+import {default as React, PropTypes} from 'react'
+import {createContainer} from 'meteor/react-meteor-data'
+import Worx from '../../../models/worx'
 import Dialog from '../shared/dialog'
 
-const StatelessFunction = (props) => {
-  const {worx, onRequestClose} = props;
-  
+const mapMeteorToProps = ({ currentWorxId }) => {
+  return {
+    worx: currentWorxId ? Worx.findOne(currentWorxId) : null
+  }
+};
+
+const WorxDetailsDialog = (props) => {
+  const {worx} = props;
+
+  const title = worx && `Lat: ${worx.location.lat}, Lng: ${worx.location.lng}`;
+
+  const dialogChildren = worx && (
+    <h3>
+      { worx.getCategory().name }
+    </h3>
+  );
+
   return (
-    <Dialog 
-      title={ worx.location.lat + ' ' + worx.location.lng }
-      open={true}
-      onRequestClose={ onRequestClose }
-    > 
-      <h3>
-        { worx.getCategory().name }
-      </h3>
-    </Dialog>
-    
+    <Dialog {...{title}} {...props} >{dialogChildren}</Dialog>
   )
 };
 
-StatelessFunction.propTypes = {
-  worx: React.PropTypes.object.isRequired,
-  onRequestClose: React.PropTypes.func.isRequired
+WorxDetailsDialog.propTypes = {
+  worx: PropTypes.object,
+  open: PropTypes.bool.isRequired,
+  onRequestClose: PropTypes.func.isRequired
 };
 
-export default StatelessFunction;
+export default createContainer(mapMeteorToProps, WorxDetailsDialog);

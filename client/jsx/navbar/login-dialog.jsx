@@ -12,7 +12,6 @@ class Component extends React.Component {
     super(props);
   }
   loginCallBack(err) {
-    console.log("called", this)
     const {displayNotification} = this.context;
     if(err) {
       console.log(err);

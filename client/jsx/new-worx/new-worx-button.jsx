@@ -2,7 +2,7 @@ import React from 'react'
 import {Meteor} from 'meteor/meteor'
 import {createContainer} from 'meteor/react-meteor-data'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
-import ImageAddAPhoto from '../../../node_modules/material-ui/svg-icons/image/add-a-photo'
+import ImageAddAPhoto from 'material-ui/svg-icons/image/add-a-photo'
 
 const mapMeteorToProps = () => {
   return {
