@@ -49,7 +49,14 @@ class WorxMap extends React.Component {
     });
   }
 
-  handleCenterMapButtonClick() {
+  handleMapClick() {
+    this.setState({
+      currentWorxId: null,
+      infoWindowOpen: false
+    });
+  }
+
+  handleCenterMap() {
     this.setState({
       centerOnGeolocation: true
     });
@@ -77,8 +84,16 @@ class WorxMap extends React.Component {
 
   closeDetailsDialog() {
     this.setState({
+      currentWorxId: null,
       detailsDialogOpen: false
     });
+  }
+
+  closeInfoWindow() {
+    this.setState({
+      currentWorxId: null,
+      infoWindowOpen: false
+    })
   }
 
   render() {
@@ -93,15 +108,16 @@ class WorxMap extends React.Component {
             center={centerOnGeolocation ? currentLocation : undefined}
             options={this.mapOptions()}
             onDragstart={() => this.handleMapDrag()}
+            onClick={() => this.handleMapClick()}
           >
+            <GeolocationMarker centered={centerOnGeolocation} onClick={() => this.handleCenterMap()} />
+            <CenterMapButton onClick={() => this.handleCenterMap()} disabled={centerOnGeolocation} />
             <WorxMarkers {...{currentWorxId}} onMarkerClick={ worxId => this.handleWorxMarkerClick(worxId) } />
-            <GeolocationMarker />
-            <CenterMapButton onClick={() => this.handleCenterMapButtonClick()} disabled={centerOnGeolocation} />
-            <WorxInfoWindow currentWorxId={ currentWorxId } open={infoWindowOpen} onRequestDetails={() => this.handleViewDetails()} />
+            <WorxInfoWindow currentWorxId={ currentWorxId } open={infoWindowOpen} onRequestClose={() => this.closeInfoWindow()} onRequestDetails={() => this.handleViewDetails()} />
+            <WorxDetailsDialog currentWorxId={ currentWorxId } open={detailsDialogOpen} onRequestClose={() => this.closeDetailsDialog()} />
+            <NewWorxManager onWorxCreated={newWorxId => this.handleNewWorxCreated(newWorxId)} />
           </GoogleMap>
         </MapLoader>
-        <NewWorxManager onWorxCreated={newWorxId => this.handleNewWorxCreated(newWorxId)} />
-        <WorxDetailsDialog currentWorxId={ currentWorxId } open={detailsDialogOpen} onRequestClose={() => this.closeDetailsDialog()} />
       </div>
     )
   }

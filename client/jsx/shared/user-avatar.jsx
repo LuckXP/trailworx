@@ -14,7 +14,7 @@ const mapMeteorToProps = () => {
 const StatelessFunction = ({src, style}) => {
   const props = {
     src,
-    icon: src ? null : Person,
+    icon: src ? null : <Person />,
     style: {
       ...style,
       verticalAlign: 'middle'

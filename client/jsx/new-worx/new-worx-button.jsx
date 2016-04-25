@@ -13,7 +13,7 @@ const mapMeteorToProps = () => {
 
 const StatelessFunction = ({loggedIn, hasLocation, onClick}) => {
   return (
-    <FloatingActionButton disabled={! loggedIn || ! hasLocation} onClick={onClick} style={{position: 'absolute', right: 20, bottom: 100}}>
+    <FloatingActionButton disabled={! loggedIn || ! hasLocation} onClick={onClick} style={{position: 'absolute', right: 20, bottom: 100, zIndex: 1}}>
       <ImageAddAPhoto />
     </FloatingActionButton>
   )

@@ -10,16 +10,17 @@ const mapMeteorToProps = ({ currentWorxId }) => {
   }
 };
 
-const WorxInfoWindow = ({worx, open, onRequestDetails, ...props}) => {
-  console.log(props, open);
-
+const WorxInfoWindow = ({worx, open, onRequestDetails, onRequestClose, ...props}) => {
   const title = worx && `Lat: ${worx.location.lat}, Lng: ${worx.location.lng}`;
 
-  return open && worx && <InfoWindow position={worx.location} {...props} >
-    <div>
-      <div>{`Lat: ${worx.location.lat}, Lng: ${worx.location.lng}`}</div>
-      <div>{ worx.getCategory().name }</div>
-      <button onClick={onRequestDetails} >View Details</button>
+  return open && worx && <InfoWindow
+    options={{content: null}}
+    position={worx.location} {...props}
+    onCloseclick={onRequestClose} >
+      <div>
+        <div>{`Lat: ${worx.location.lat}, Lng: ${worx.location.lng}`}</div>
+        <div>{ worx.getCategory().name }</div>
+        <button onClick={onRequestDetails} >View Details</button>
     </div>
   </InfoWindow>;
 };

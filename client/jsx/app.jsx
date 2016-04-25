@@ -9,7 +9,7 @@ import NotificationBar from './notification-bar'
 
 export default () => {
   return (
-    <div>
+    <div id="app">
       <Head />
       <MuiThemeProvider>
         <NotificationBar>

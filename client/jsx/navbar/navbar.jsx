@@ -47,7 +47,7 @@ class Component extends React.Component {
     );
     const correctButton = !this.props.loggedIn ? signIn : signOut;
     return (
-      <div>
+      <div id="navbar">
         <AppBar
           style={{position: "fixed", top: 0, left: 0, right: 0}}
           title="TrailWorx"
