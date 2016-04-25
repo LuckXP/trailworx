@@ -1,20 +1,28 @@
 import React from 'react'
-import Dialog from 'material-ui/Dialog'
+import { createContainer } from 'meteor/react-meteor-data'
+import MaterialDialog from 'material-ui/Dialog'
 
-const StatelessFunction = ({ children, ...otherProps }) => {
-  
+const mapMeteorToProps = () => {
+  return {
+    expandDialogWidth: rwindow.innerWidth() < 768
+  }
+};
+
+const Dialog = ({expandDialogWidth, ...props}) => {
   return (
-    
-    <Dialog 
-      { ...otherProps } 
-      style={{}}
-    >
-      { children }
-    </Dialog>
-    
+
+    <MaterialDialog
+      { ...props }
+
+      contentStyle={{
+        marginLeft: expandDialogWidth ? 0 : 'auto',
+        marginRight: expandDialogWidth ? 0 : 'auto',
+        width: expandDialogWidth ? '100%' : '75%'
+      }}
+    />
   );
 };
 
-StatelessFunction.propTypes = {};
+Dialog.propTypes = {};
 
-export default StatelessFunction;
+export default createContainer(mapMeteorToProps, Dialog);

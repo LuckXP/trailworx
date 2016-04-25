@@ -14,7 +14,6 @@ const WorxInfoWindow = ({worx, open, onRequestDetails, onRequestClose, ...props}
   const title = worx && `Lat: ${worx.location.lat}, Lng: ${worx.location.lng}`;
 
   return open && worx && <InfoWindow
-    options={{content: null}}
     position={worx.location} {...props}
     onCloseclick={onRequestClose} >
       <div>

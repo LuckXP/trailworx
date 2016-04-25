@@ -2,6 +2,7 @@ import {default as React, PropTypes} from 'react'
 import {createContainer} from 'meteor/react-meteor-data'
 import Worx from '../../../models/worx'
 import Dialog from '../shared/dialog'
+import FlatButton from 'material-ui/FlatButton'
 
 const mapMeteorToProps = ({ currentWorxId }) => {
   return {
@@ -10,9 +11,10 @@ const mapMeteorToProps = ({ currentWorxId }) => {
 };
 
 const WorxDetailsDialog = (props) => {
-  const {worx} = props;
+  const {worx, onRequestClose} = props;
 
   const title = worx && `Lat: ${worx.location.lat}, Lng: ${worx.location.lng}`;
+  const actions = <FlatButton label="Close" onClick={() => onRequestClose()} />;
 
   const dialogChildren = worx && (
     <h3>
@@ -21,7 +23,12 @@ const WorxDetailsDialog = (props) => {
   );
 
   return (
-    <Dialog {...{title}} {...props} >{dialogChildren}</Dialog>
+    <Dialog
+      {...{title, actions}}
+      {...props}
+    >
+      {dialogChildren}
+    </Dialog>
   )
 };
 
