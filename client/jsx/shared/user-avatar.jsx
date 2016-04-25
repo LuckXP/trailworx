@@ -4,8 +4,8 @@ import Avatar from 'material-ui/Avatar'
 import FlatButton from 'material-ui/FlatButton'
 import Person from 'material-ui/svg-icons/social/person'
 
-const mapMeteorToProps = () => {
-  const user = Meteor.user();
+const mapMeteorToProps = ({user}) => {
+  user = user || Meteor.user();
   return {
     src: user && user.profile.picture
   }

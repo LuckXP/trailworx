@@ -33,7 +33,7 @@ class Component extends React.Component {
           <RaisedButton label="Cancel" onClick={ onCancel } />
         ]}
       >
-        <img src={pictureURI} height="300px"/>
+        <img src={pictureURI} width="100%"/>
         <CategoryDropDownMenu onCurrentIdChanged={newId => this.onWorxPropertyChanged('categoryId', newId)} />
         <TextField hintText="Description" value={worx.description} onChange={event => this.onWorxPropertyChanged('description', event.target.value)} />
       </Dialog>

@@ -1,6 +1,7 @@
 'use strict';
 
 import {Comments} from './collections'
+import User from './user'
 
 export default Astro.Class({
   name: 'Comment',
@@ -20,6 +21,14 @@ export default Astro.Class({
     body: {
     	type: 'string',
     	simpleValidator: 'required,string'
+    }
+  },
+  relations: {
+    getUser: {
+      type: 'one',
+      class: 'User',
+      local: 'userId',
+      foreign: '_id'
     }
   }
 });
