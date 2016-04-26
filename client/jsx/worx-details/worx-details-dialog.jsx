@@ -5,12 +5,17 @@ import Dialog from '../shared/dialog'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import Comment from '../shared/comment'
-import List from 'material-ui/List';
+import List from 'material-ui/List'
+import NewComment from '../shared/new-comment'
 
 const mapMeteorToProps = ({ currentWorxId }) => {
-  return {
-    worx: currentWorxId ? Worx.findOne(currentWorxId) : null
+  const worx = currentWorxId ? Worx.findOne(currentWorxId) : null;
+  let comments;
+  if (worx) {
+    comments = worx.getComments().fetch()
   }
+  console.log(worx, comments);
+  return { worx, comments }
 };
 
 class WorxDetailsDialog extends React.Component {
@@ -30,28 +35,28 @@ class WorxDetailsDialog extends React.Component {
   }
 
   render() {
-    const {worx, onRequestClose, ...props} = this.props;
+    const {currentWorxId, worx, comments, onRequestClose, ...props} = this.props;
 
-    let dialogChildren;
-    if (worx) {
-      const photoGallery = worx.getWorxPhotos().map(worxPhotoObject => {
-        return <img src={worxPhotoObject.uri} width="100%"/>;
+    let photoGallery, commentTags, dialogChildren;
+    if (currentWorxId) {
+      photoGallery = worx.getWorxPhotos().map( photo => {
+        return <img key={photo._id} src={photo.uri} width="100%" />;
       });
 
-      const comments = worx.comments.map(oneComment => <Comment comment={oneComment}/>);
+      commentTags = comments.map( c => <Comment key={c._id} comment={c} /> );
 
       dialogChildren = (
-        <div id="worx-details-dialog">
-          <h3 style={{textAlign: 'center'}}>
+        <div>
+          <h3>
             { worx.getCategory().name }
           </h3>
-          {photoGallery}
-          {photoGallery}
-          {photoGallery}
+          <h4>{`Lat: ${worx.location.lat}, Lng: ${worx.location.lng}`}</h4>
           {photoGallery}
           <List>
-            {comments}
+            {commentTags}
           </List>
+
+          <NewComment worxId={currentWorxId} />
         </div>
       );
     }
@@ -61,7 +66,7 @@ class WorxDetailsDialog extends React.Component {
         actions={<RaisedButton label="Close" onClick={() => onRequestClose()}/>}
         {...props}
       >
-        {worx && dialogChildren}
+        {dialogChildren}
       </Dialog>
     )
   }

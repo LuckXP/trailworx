@@ -41,13 +41,6 @@ export default Astro.Class({
       default: () => new VoteManager()
     },
 
-    comments: {
-      type: 'array',
-      nested: 'Comment',
-      simpleValidator: 'required',
-      default: () => []
-    },
-
     active: {
       type: 'boolean',
       simpleValidator: 'required',
@@ -61,7 +54,14 @@ export default Astro.Class({
       local: '_id',
       foreign: 'metadata.worxId'
     },
-    
+
+    getComments: {
+      type: 'many',
+      class: 'Comment',
+      local: '_id',
+      foreign: 'worxId'
+    },
+
     getCategory: {
       type: 'one',
       class: 'Category',
@@ -72,6 +72,7 @@ export default Astro.Class({
   events: {
     beforeRemove() {
       this.getWorxPhotos().fetch().forEach(photo => photo.remove());
+      this.getComments().fetch().forEach(comment => comment.remove());
     }
   }
 });
