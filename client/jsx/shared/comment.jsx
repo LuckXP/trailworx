@@ -15,10 +15,12 @@ const Comment = ({comment}) => {
         <UserAvatar user={ user } />
       }
     >
-      {user.profile.name}
-      {comment.body}
-      {comment.createdAt}
-      <IconButtton />
+      <div>
+        {user.profile.name}
+        {comment.body}
+        {comment.createdAt.toString()}
+        <IconButton />
+      </div>
     </ListItem>
     
   )
@@ -29,4 +31,4 @@ Comment.propTypes = {
 
 };
 
-export default createContainer(mapMeteorToProps, Comment);
+export default Comment;

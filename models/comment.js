@@ -5,7 +5,7 @@ import User from './user'
 
 export default Astro.Class({
   name: 'Comment',
-  collections: Comments,
+  collection: Comments,
   behaviors: ['timestamp'],
   fields: {
     worxId: {
@@ -20,7 +20,8 @@ export default Astro.Class({
 
     body: {
     	type: 'string',
-    	simpleValidator: 'required,string'
+    	simpleValidator: 'required,string',
+      default: ''
     }
   },
   relations: {
