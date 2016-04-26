@@ -108,13 +108,13 @@ class NewWorxManager extends React.Component {
 
   render() {
     const {dialogOpen, worx, pictureURI} = this.state;
-    const newWorxDialog = dialogOpen ? <NewWorxDialog
+    const newWorxDialog = <NewWorxDialog
       open={dialogOpen}
       worx={worx}
       pictureURI={pictureURI}
       onCancel={ () => this.cancelNewWorx() }
       onDone={ () => this.saveNewWorx() }
-    /> : null;
+    />;
 
     return (
       <div id="new-worx-manager">

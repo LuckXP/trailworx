@@ -4,7 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import CategoryDropDownMenu from './../shared/category-drop-down-menu'
 import TextField from 'material-ui/TextField'
 
-class Component extends React.Component {
+class NewWorxDialog extends React.Component {
 
   constructor(props) {
     super(props);
@@ -17,36 +17,42 @@ class Component extends React.Component {
 
   isDoneDisabled() {
     const {worx} = this.props;
-    return !worx.validate('categoryId');
+    return !worx || !worx.validate('categoryId');
   }
 
   render() {
     const {open, worx, pictureURI, onDone, onCancel} = this.props;
 
+    const dialogChildren = worx && (
+      <div>
+        <img src={pictureURI} width="100%"/>
+        <CategoryDropDownMenu onCurrentIdChanged={newId => this.onWorxPropertyChanged('categoryId', newId)} />
+        <TextField hintText="Description" value={worx.description} onChange={event => this.onWorxPropertyChanged('description', event.target.value)} />
+      </div>
+    );
+
     return (
       <Dialog
         open={open}
-        modal={true}
         title="Add a Worx"
+        onRequestClose={ onCancel }
         actions={[
           <RaisedButton label="Done" disabled={this.isDoneDisabled()} onClick={ onDone }/>,
           <RaisedButton label="Cancel" onClick={ onCancel } />
         ]}
       >
-        <img src={pictureURI} width="100%"/>
-        <CategoryDropDownMenu onCurrentIdChanged={newId => this.onWorxPropertyChanged('categoryId', newId)} />
-        <TextField hintText="Description" value={worx.description} onChange={event => this.onWorxPropertyChanged('description', event.target.value)} />
+        {dialogChildren}
       </Dialog>
     );
   }
 }
 
-Component.propTypes = {
+NewWorxDialog.propTypes = {
   open: React.PropTypes.bool.isRequired,
-  worx: React.PropTypes.object.isRequired,
-  pictureURI: React.PropTypes.string.isRequired,
+  worx: React.PropTypes.object,
+  pictureURI: React.PropTypes.string,
   onDone: React.PropTypes.func.isRequired,
   onCancel: React.PropTypes.func.isRequired
 };
 
-export default Component;
+export default NewWorxDialog;

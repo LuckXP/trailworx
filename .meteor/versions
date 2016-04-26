@@ -47,6 +47,7 @@ jagi:astronomy-simple-validators@1.0.3
 jagi:astronomy-timestamp-behavior@1.1.0
 jagi:astronomy-validators@1.1.2
 jagi:reactive-map@2.0.0
+jcheroske:responsive-media-queries@0.0.1
 jquery@1.11.8
 launch-screen@1.0.11
 less@2.6.0

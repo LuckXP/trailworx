@@ -2,7 +2,7 @@ import {default as React, PropTypes} from 'react'
 import {createContainer} from 'meteor/react-meteor-data'
 import Worx from '../../../models/worx'
 import Dialog from '../shared/dialog'
-import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import Comment from '../shared/comment'
 import List from 'material-ui/List';
@@ -19,44 +19,49 @@ class WorxDetailsDialog extends React.Component {
     super(props);
   }
 
-  onCommentPropertyChanged(propertyName, newValue) {
-    this.props.worx.set(propertyName, newValue);
+  onCommentPropertyChanged(propertyName,newValue) {
+    this.props.worx.set(propertyName,newValue);
     this.forceUpdate();
   }
 
   isDoneDisabled() {
     const {worx} = this.props;
-    return !worx.validate('categoryId');
+    return ! worx.validate('categoryId');
   }
 
-
   render() {
-    const {worx, onRequestClose} = this.props;
-    const photoGallery = worx && worx.getWorxPhotos().map( worxPhotoObject => {
-      return <img src={worxPhotoObject.uri} width="100%" />;
-    });
-    const comments = worx && worx.comments.map( oneComment => <Comment comment={oneComment} /> );
-    const title = worx && `Lat: ${worx.location.lat}, Lng: ${worx.location.lng}`;
-    const actions = <FlatButton label="Close" onClick={() => onRequestClose()} />;
+    const {worx, onRequestClose, ...props} = this.props;
 
-    const dialogChildren = worx && (
-       <div>
-        <h3>
-          { worx.getCategory().name }
-        </h3>
-         {photoGallery}
-         <List>
-          {comments}
-         </List>
-       </div>
-    );
+    let dialogChildren;
+    if (worx) {
+      const photoGallery = worx.getWorxPhotos().map(worxPhotoObject => {
+        return <img src={worxPhotoObject.uri} width="100%"/>;
+      });
+
+      const comments = worx.comments.map(oneComment => <Comment comment={oneComment}/>);
+
+      dialogChildren = (
+        <div id="worx-details-dialog">
+          <h3 style={{textAlign: 'center'}}>
+            { worx.getCategory().name }
+          </h3>
+          {photoGallery}
+          {photoGallery}
+          {photoGallery}
+          {photoGallery}
+          <List>
+            {comments}
+          </List>
+        </div>
+      );
+    }
 
     return (
       <Dialog
-        {...{title, actions}}
-        {...this.props}
+        actions={<RaisedButton label="Close" onClick={() => onRequestClose()}/>}
+        {...props}
       >
-        {dialogChildren}
+        {worx && dialogChildren}
       </Dialog>
     )
   }

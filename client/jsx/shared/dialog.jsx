@@ -1,47 +1,59 @@
-import React from 'react'
+import {default as React, PropTypes} from 'react'
 import { createContainer } from 'meteor/react-meteor-data'
+import MediaQueries from 'meteor/jcheroske:responsive-media-queries'
 import MaterialDialog from 'material-ui/Dialog'
 
 const mapMeteorToProps = () => {
   return {
-    expandDialog: rwindow.innerWidth() < 768
+    isPortraitPhone: MediaQueries.isPortraitPhone()
   }
 };
 
-const contentStyleSmall = {
-  marginLeft: 0,
-  marginRight: 0,
-  width: 'auto',
-  left: 5,
-  right: 5,
-  top: 10,
-  bottom: 10,
-  position: 'absolute'
-};
+const Dialog = ({isPortraitPhone, ...props}, {muiTheme}) => {
+  console.log(muiTheme);
 
-const actionContainerStyleSmall = {
-  bottom: 3
-};
+  const phoneStyles = {
+    autoDetectWindowHeight: false,
+    autoScrollBodyContent: false,
+    contentClassName: 'dialog-content',
+    contentStyle: {
+      margin: 0,
+      width: 'auto',
+      transform: 'initial',
+      position: 'fixed',
+      top: muiTheme.appBar.height + 5,
+      bottom: 5,
+      left: 5,
+      right: 5
+    },
+    bodyStyle: {
+      borderColor: 'blue',
+      borderWidth: 1,
+      borderStyle: 'solid',
+      overflow: 'scroll',
+      maxHeight: 'calc(100% - 52px)',
+      padding: 0
+    },
+    actionsContainerStyle: {
+      marginBottom: 0,
+      paddingRight: 10,
+      position: 'absolute',
+      bottom: 0
+    }
+  };
 
-const bodyStyleSmall = {
-  padding: 0,
-  marginLeft: 7,
-  marginRight: 7
-};
-
-const Dialog = ({expandDialog, ...props}) => {
   return (
-
     <MaterialDialog
       { ...props }
-      autoScrollBodyContent={ true }
-      bodyStyle={ expandDialog ? bodyStyleSmall : null }
-      actionsContainerStyle={ expandDialog ? actionContainerStyleSmall : null }
-      contentStyle={ expandDialog ? contentStyleSmall : null }
+      { ...isPortraitPhone ? phoneStyles : null }
     />
   );
 };
 
 Dialog.propTypes = {};
+
+Dialog.contextTypes = {
+  muiTheme: PropTypes.object
+};
 
 export default createContainer(mapMeteorToProps, Dialog);

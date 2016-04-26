@@ -4,8 +4,6 @@ import UserAvatar from './user-avatar'
 import IconButton from 'material-ui/IconButton'
 import ListItem from 'material-ui/List/ListItem';
 
-
-
 const Comment = ({comment}) => {
   const user = comment.getUser();
   return (
@@ -20,7 +18,7 @@ const Comment = ({comment}) => {
       {comment.createdAt}
       <IconButtton />
     </ListItem>
-    
+
   )
 };
 
@@ -29,4 +27,4 @@ Comment.propTypes = {
 
 };
 
-export default createContainer(mapMeteorToProps, Comment);
+export default Comment;
