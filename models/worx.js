@@ -72,12 +72,8 @@ export default Astro.Class({
   },
   events: {
     beforeRemove() {
-      const photos = this.getWorxPhotos().fetch();
-      console.log(photos);
-      photos.forEach(photo => WorxPhotos.remove(photo._id));
-      this.getComments().fetch().forEach(comment => comment.remove());
+      this.getWorxPhotos().forEach( photo => Meteor.call('removeWorxPhotoById', photo._id) );
+      this.getComments().forEach(comment => comment.remove());
     }
   }
 });
-
-
