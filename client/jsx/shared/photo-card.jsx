@@ -6,6 +6,7 @@ import CardText from 'material-ui/Card/CardText'
 
 const PhotoCard = ({overlayText, src, description}) => {
   console.log('overlay text', overlayText);
+  const displayCardText = description ? <CardText>{description}</CardText> : null;
   return (
     <Card>
       <CardMedia
@@ -13,9 +14,7 @@ const PhotoCard = ({overlayText, src, description}) => {
       >
         <img src={src} width="100%" />
       </CardMedia>
-      <CardText>
-        {description}
-      </CardText>
+      {displayCardText}
     </Card>
   )
 };
