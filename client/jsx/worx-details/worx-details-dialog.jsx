@@ -76,7 +76,7 @@ class WorxDetailsDialog extends React.Component {
     let dialogChildren, deleteButton;
     if (worx) {
       const photoCards = photos.map( photo => {
-        return <PhotoCard key={photo._id} src={photo.uri} overlayText={category} width="100%" />;
+        return <PhotoCard key={photo._id} src={photo.uri} overlayText={category} width="100%" description={ worx.description } />;
       });
 
       const commentTags = comments.map( c => <Comment key={c._id} comment={c} handleDeleteComment={ () => this.handleDeleteComment(c) } /> );
