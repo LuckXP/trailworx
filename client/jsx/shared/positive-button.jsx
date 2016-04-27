@@ -4,7 +4,8 @@ import AbstractButton from './abstract-button'
 class PositiveButton extends AbstractButton {
   getStyle() {
     return {
-      border: 'none'
+      borderColor: '#42A5F5',
+      borderWidth: 1
     }
   }
 

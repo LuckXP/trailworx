@@ -38,12 +38,16 @@ const Dialog = ({isPortraitPhone, ...props}, {muiTheme}) => {
       bottom: 0,
       right: 0
     }
+  }
+  const desktopStyles = {
+    autoDetectWindowHeight: true,
+    autoScrollBodyContent: true,
   };
 
   return (
     <MaterialDialog
       { ...props }
-      { ...isPortraitPhone ? phoneStyles : null }
+      { ...isPortraitPhone ? phoneStyles : desktopStyles }
     />
   );
 };

@@ -1,25 +1,41 @@
 import React from 'react'
 import {createContainer} from 'meteor/react-meteor-data'
 import UserAvatar from './user-avatar'
-import IconButton from 'material-ui/IconButton'
-import ListItem from 'material-ui/List/ListItem';
+import Card from 'material-ui/Card/Card';
+import CardActions from 'material-ui/Card/CardActions';
+import CardHeader from 'material-ui/Card/CardHeader';
+import CardTitle from 'material-ui/Card/CardTitle';
+import NegativeButton from './negative-button';
+import CardText from 'material-ui/Card/CardText';
 
-const Comment = ({comment}) => {
+const mapMeteorToProps = ({comment}) => {
+  return {
+    loggedIn: Meteor.userId() === comment.userId
+  }
+
+}
+
+const Comment = ({comment, loggedIn, handleDeleteComment}) => {
   const user = comment.getUser();
+  const deleteButtonDisplay = loggedIn ?  <NegativeButton label="Delete" onClick={ () => handleDeleteComment(comment) } /> : null;
+
   return (
-    <ListItem
-      disabled={true}
-      leftAvatar={
-        <UserAvatar user={ user } />
-      }
-    >
-      <div>
-        {user.profile.name}
+    <Card style={{
+      marginBottom: 10
+    }}>
+      <CardHeader
+        title={ user.profile.name }
+        subtitle={ comment.createdAt.toString().substr(0, 15) }
+        avatar={ <UserAvatar user={ user } /> }
+      />
+
+      <CardText>
         {comment.body}
-        {comment.createdAt.toString()}
-        <IconButton />
-      </div>
-    </ListItem>
+      </CardText>
+      <CardActions>
+        {deleteButtonDisplay}
+      </CardActions>
+    </Card>
 
   )
 };
@@ -29,4 +45,11 @@ Comment.propTypes = {
 
 };
 
-export default Comment;
+export default createContainer(mapMeteorToProps, Comment);
+
+
+
+
+
+
+

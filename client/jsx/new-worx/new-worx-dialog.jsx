@@ -1,8 +1,10 @@
 import React from 'react'
 import Dialog from '../shared/dialog'
-import RaisedButton from 'material-ui/RaisedButton'
+import PositiveButton from '../shared/positive-button'
+import NeutralButton from '../shared/neutral-button'
 import CategoryDropDownMenu from './../shared/category-drop-down-menu'
 import TextField from 'material-ui/TextField'
+import PhotoCard from '../shared/photo-card'
 
 class NewWorxDialog extends React.Component {
 
@@ -25,24 +27,42 @@ class NewWorxDialog extends React.Component {
 
     const dialogChildren = worx && (
       <div>
-        <img src={pictureURI} width="100%"/>
+        <PhotoCard src={pictureURI} width="100%" overlayText="Create your new Worx" />
         <CategoryDropDownMenu onCurrentIdChanged={newId => this.onWorxPropertyChanged('categoryId', newId)} />
-        <TextField
-          hintText="Description"
-          value={worx.description}
-          onChange={event => this.onWorxPropertyChanged('description', event.target.value)}
-        />
+        <div id="new-comment" style={{
+          width: '100%',
+          boxSizing: 'border-box',
+          borderWidth: 1,
+          borderStyle: 'solid',
+          borderColor: 'darkgray',
+          paddingLeft: 5,
+          paddingRight: 5,
+          paddingBottom: 5,
+          textAlign: 'right'
+        }}>
+          <TextField
+            hintText="Description"
+            value={worx.description}
+            onChange={event => this.onWorxPropertyChanged('description', event.target.value)}
+            multiLine={true}
+            rows={3}
+            style={{
+            width: '100%',
+            marginTop: -5,
+            marginBottom: -5
+          }}
+          />
+        </div>
       </div>
     );
 
     return (
       <Dialog
         open={open}
-        title="Add a Worx"
         onRequestClose={ onCancel }
         actions={[
-          <RaisedButton label="Done" disabled={this.isDoneDisabled()} onClick={ onDone }/>,
-          <RaisedButton label="Cancel" onClick={ onCancel } />
+          <NeutralButton style={{float: 'left'}} label="Cancel" onClick={ onCancel } />,
+          <PositiveButton label="Create Worx" disabled={this.isDoneDisabled()} onClick={ onDone }/>
         ]}
       >
         {dialogChildren}
