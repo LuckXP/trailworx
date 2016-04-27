@@ -4,6 +4,7 @@ import FlatButton from 'material-ui/FlatButton'
 import {Meteor} from 'meteor/meteor'
 import LoginDialog from './login-dialog'
 import UserAvatar from '../shared/user-avatar'
+import Logo from '../shared/logo'
 import {createContainer} from 'meteor/react-meteor-data'
 
 const mapMeteorToProps = props => {
@@ -49,8 +50,8 @@ class Component extends React.Component {
     return (
       <div id="navbar">
         <AppBar
-          style={{position: "fixed", top: 0, left: 0, right: 0}}
-          title="TrailWorx"
+          style={{position: "fixed", top: 0, left: 0, right: 0, backgroundImage: "linear-gradient(-90deg, #0096FA, #FFFFFF)"}}
+          iconElementLeft={<Logo />}
           iconElementRight={ correctButton }
         />
         <LoginDialog open={ this.state.loginDialogOpen } closeLoginDialog={ () => this.setState({ loginDialogOpen: false }) } />

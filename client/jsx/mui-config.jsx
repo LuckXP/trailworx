@@ -17,7 +17,9 @@ class MUIConfig extends React.Component {
     }
   }
 
-  configureTheme(t) {}
+  configureTheme(t) {
+    console.log(t);
+  }
 
   render() {
     console.log(this.props.children);
