@@ -2,20 +2,28 @@ import {default as React, PropTypes} from 'react'
 import {createContainer} from 'meteor/react-meteor-data'
 import Worx from '../../../models/worx'
 import Dialog from '../shared/dialog'
-import RaisedButton from 'material-ui/RaisedButton'
-import TextField from 'material-ui/TextField'
+import PhotoCard from '../shared/photo-card'
+import NeutralButton from '../shared/neutral-button'
+import NegativeButton from '../shared/negative-button'
 import Comment from '../shared/comment'
 import List from 'material-ui/List'
+import Divider from 'material-ui/Divider'
 import NewComment from '../shared/new-comment'
 
 const mapMeteorToProps = ({ currentWorxId }) => {
-  const worx = currentWorxId ? Worx.findOne(currentWorxId) : null;
-  let comments;
-  if (worx) {
-    comments = worx.getComments().fetch()
+  let meteorProps = {};
+  if (currentWorxId) {
+    const worx = Worx.findOne(currentWorxId);
+    meteorProps = {
+      isLoggedIn: Meteor.userId() != null,
+      isOwner: Meteor.userId() === worx.userId,
+      worx,
+      category: worx.getCategory().name,
+      comments: worx.getComments().fetch(),
+      photos: worx.getWorxPhotos().fetch()
+    }
   }
-  console.log(worx, comments);
-  return { worx, comments }
+  return meteorProps;
 };
 
 class WorxDetailsDialog extends React.Component {
@@ -35,35 +43,38 @@ class WorxDetailsDialog extends React.Component {
   }
 
   render() {
-    const {currentWorxId, worx, comments, onRequestClose, ...props} = this.props;
+    const {currentWorxId, isLoggedIn, isOwner, worx, category, comments, photos, onRequestClose, ...props} = this.props;
 
-    let photoGallery, commentTags, dialogChildren;
-    if (currentWorxId) {
-      photoGallery = worx.getWorxPhotos().map( photo => {
-        return <img key={photo._id} src={photo.uri} width="100%" />;
+    let dialogChildren, deleteButton;
+    if (worx) {
+      const photoCards = photos.map( photo => {
+        return <PhotoCard key={photo._id} src={photo.uri} overlayText={category} width="100%" />;
       });
 
-      commentTags = comments.map( c => <Comment key={c._id} comment={c} /> );
+      const commentTags = comments.map( c => <Comment key={c._id} comment={c} /> );
+
+      const newComment = isLoggedIn ? <NewComment worxId={currentWorxId} /> : null;
+
+      deleteButton = isOwner ? <NegativeButton label="Delete Worx" style={{float: 'left'}} /> : null;
 
       dialogChildren = (
         <div>
-          <h3>
-            { worx.getCategory().name }
-          </h3>
-          <h4>{`Lat: ${worx.location.lat}, Lng: ${worx.location.lng}`}</h4>
-          {photoGallery}
+          {photoCards}
           <List>
             {commentTags}
           </List>
 
-          <NewComment worxId={currentWorxId} />
+          {newComment}
         </div>
       );
     }
 
     return (
       <Dialog
-        actions={<RaisedButton label="Close" onClick={() => onRequestClose()}/>}
+        actions={[
+          deleteButton,
+          <NeutralButton label="Close" onClick={() => onRequestClose()}/>
+        ]}
         {...props}
       >
         {dialogChildren}

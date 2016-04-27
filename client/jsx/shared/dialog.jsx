@@ -27,18 +27,18 @@ const Dialog = ({isPortraitPhone, ...props}, {muiTheme}) => {
       right: 5
     },
     bodyStyle: {
-      borderColor: 'blue',
-      borderWidth: 1,
-      borderStyle: 'solid',
+      //borderColor: 'blue',
+      //borderWidth: 1,
+      //borderStyle: 'solid',
       overflow: 'scroll',
       maxHeight: 'calc(100% - 52px)',
       padding: 0
     },
     actionsContainerStyle: {
       marginBottom: 0,
-      paddingRight: 10,
       position: 'absolute',
-      bottom: 0
+      bottom: 0,
+      right: 0
     }
   };
 

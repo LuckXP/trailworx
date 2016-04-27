@@ -3,6 +3,7 @@ import {createContainer} from 'meteor/react-meteor-data'
 import FlatButton from 'material-ui/FlatButton'
 import Comment from '../../../models/comment'
 import TextField from 'material-ui/TextField'
+import PositveButton from '../shared/positive-button'
 
 const mapMeteorToProps = (props) => {
   return {
@@ -26,10 +27,10 @@ class NewComment extends React.Component {
     this.forceUpdate();
   }
 
-  initEmptyComment() { 
+  initEmptyComment() {
     const {userId} = this.props;
     const {worxId} = this.props;
-  
+
     this.setState({
       comment: new Comment({userId, worxId})
     });
@@ -38,7 +39,7 @@ class NewComment extends React.Component {
   saveNewComment() {
     const {comment} = this.state;
     const {displayNotification} = this.context;
-    
+
     comment.save((error, id) => {
       if (error) {
         this.cancelNewComment();
@@ -59,16 +60,32 @@ class NewComment extends React.Component {
   render() {
 
     const {comment} = this.state;
-      
+
     return (
-      <div id="new-comment">
-        <TextField 
-          hintText="Add Comment" 
+      <div id="new-comment" style={{
+        width: '100%',
+        boxSizing: 'border-box',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'darkgray',
+        paddingLeft: 5,
+        paddingRight: 5,
+        paddingBottom: 5,
+        textAlign: 'right'
+      }}>
+        <TextField
+          hintText="Add Comment"
           value={comment.body}
           onChange={event => this.onCommentPropertyChanged('body', event.target.value)}
+          multiLine={true}
+          rows={3}
+          style={{
+            width: '100%',
+            marginTop: -5,
+            marginBottom: -5
+          }}
         />
-        <FlatButton label="Cancel" onClick={() => this.cancelNewComment()} />
-        <FlatButton label="Add Comment" onClick={() => this.saveNewComment()} />
+        <PositveButton label="Add Comment" onClick={() => this.saveNewComment()} />
       </div>
     );
   }

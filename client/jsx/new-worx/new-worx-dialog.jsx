@@ -27,7 +27,11 @@ class NewWorxDialog extends React.Component {
       <div>
         <img src={pictureURI} width="100%"/>
         <CategoryDropDownMenu onCurrentIdChanged={newId => this.onWorxPropertyChanged('categoryId', newId)} />
-        <TextField hintText="Description" value={worx.description} onChange={event => this.onWorxPropertyChanged('description', event.target.value)} />
+        <TextField
+          hintText="Description"
+          value={worx.description}
+          onChange={event => this.onWorxPropertyChanged('description', event.target.value)}
+        />
       </div>
     );
 
