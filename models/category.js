@@ -10,7 +10,7 @@ export default Astro.Class({
     	type: 'string',
     	simpleValidator: 'required'
     },
-    icon: {
+    markerFilename: {
     	type: 'string',
     	simpleValidator: 'required'
     }

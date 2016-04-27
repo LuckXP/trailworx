@@ -14,24 +14,46 @@ Meteor.startup(() => {
   if (Category.find().count() === 0) {
 
     new Category({
-      name: 'Fallen Tree'
+      name: 'Fallen Tree',
+      markerFilename: 'marker-fallen-tree.png'
     }).save();
 
     new Category({
-      name: 'Wash Out'
+      name: 'Wash Out',
+      markerFilename: 'marker-wash-out.png'
     }).save();
 
     new Category({
-      name: 'Rock Fall'
+      name: 'Debris or Trash',
+      markerFilename: 'marker-debris-trash.png'
     }).save();
 
     new Category({
-      name: 'Troll Droppings'
+      name: 'Invasive Species',
+      markerFilename: 'marker-invasive-species.png'
     }).save();
 
     new Category({
-      name: 'Magic Mushroom Patch'
+      name: 'Off Camber Trail',
+      markerFilename: 'marker-off-camber.png'
     }).save();
+
+    new Category({
+      name: 'Rock Fall',
+      markerFilename: 'marker-rock-fall.png'
+    }).save();
+
+    new Category({
+      name: 'Trail Feature',
+      markerFilename: 'marker-trail-feature.png'
+    }).save();
+
+    new Category({
+      name: 'Other',
+      markerFilename: 'marker-other.png'
+    }).save();
+
+
 
   }
 });
