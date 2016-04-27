@@ -10,6 +10,10 @@ Meteor.publish(null, function() {
   return Meteor.users.find({ _id: this.userId }, { fields: { 'services': 1 } });
 });
 
+Meteor.publish(null, function() {
+  return Meteor.users.find({}, {fields: {'profile': 1}});
+});
+
 Meteor.publish('currentWorx', function(currentWorxId) {
   return [
     Comment.find({worxId: currentWorxId}),

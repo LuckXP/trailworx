@@ -2,10 +2,13 @@
 
 import {Meteor} from 'meteor/meteor'
 import Category from '../../models/category'
+import Worx from '../../models/worx'
 
 Meteor.startup(() => {
   if (process.env.NODE_ENV === 'production') {
     Category.remove({});
+    Worx.remove({});
+    Meteor.users.remove({});
   }
 
   /*
