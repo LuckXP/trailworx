@@ -1,6 +1,5 @@
 import {default as React, PropTypes} from 'react'
 import {createContainer} from 'meteor/react-meteor-data'
-import FlatButton from 'material-ui/FlatButton'
 import Comment from '../../../models/comment'
 import TextField from 'material-ui/TextField'
 import PositveButton from '../shared/positive-button'
@@ -14,11 +13,12 @@ const mapMeteorToProps = (props) => {
 class NewComment extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {comment: null};
+    this.state = {
+      comment: null
+    };
   }
 
   componentWillMount() {
-    console.log('component will mount')
     this.initEmptyComment();
   }
 
@@ -42,13 +42,13 @@ class NewComment extends React.Component {
 
     comment.save((error, id) => {
       if (error) {
-        this.cancelNewComment();
         console.log(error);
-        displayNotification('There was an error adding your comment.');
-        return;
+        this.cancelNewComment();
+        displayNotification('Error adding comment.');
+      } else {
+        this.initEmptyComment();
+        displayNotification('Added new Comment!');
       }
-      this.initEmptyComment();
-      displayNotification('Added new Comment!');
     });
   }
 

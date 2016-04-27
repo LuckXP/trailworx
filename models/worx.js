@@ -3,6 +3,7 @@
 import {Worxs} from './collections'
 import {Categories} from './collections'
 import {Comments} from './collections'
+import {WorxPhotos} from './collections'
 import LatLng from './map/lat-lng'
 import VoteManager from './shared/vote-manager'
 import Comment from './comment'
@@ -33,7 +34,7 @@ export default Astro.Class({
       type: 'string',
       default: ''
     },
-    
+
     voteManager: {
       type: 'object',
       simpleValidator: 'required',
@@ -71,7 +72,9 @@ export default Astro.Class({
   },
   events: {
     beforeRemove() {
-      this.getWorxPhotos().fetch().forEach(photo => photo.remove());
+      const photos = this.getWorxPhotos().fetch();
+      console.log(photos);
+      photos.forEach(photo => WorxPhotos.remove(photo._id));
       this.getComments().fetch().forEach(comment => comment.remove());
     }
   }

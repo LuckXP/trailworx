@@ -4,13 +4,13 @@ import AbstractButton from './abstract-button'
 class NeutralButton extends AbstractButton {
   getStyle() {
     return {
-      borderColor: 'darkgray'
+      borderColor: 'black'
     }
   }
 
   getLabelStyle() {
     return {
-      color: 'darkgray'
+      color: 'black'
     }
   }
 }

@@ -15,6 +15,7 @@ const GeolocationMarker = ({position, accuracy, centered, markerOptions, circleO
   if (!position) return null;
 
   const markerDefaultOpts = {
+    'clickable': onClick != null,
     'cursor': 'pointer',
     'draggable': false,
     'flat': true,

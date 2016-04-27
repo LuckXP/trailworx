@@ -110,7 +110,7 @@ class WorxMap extends React.Component {
             onDragstart={() => this.handleMapDrag()}
             onClick={() => this.handleMapClick()}
           >
-            <GeolocationMarker centered={centerOnGeolocation} onClick={() => this.handleCenterMap()} />
+            <GeolocationMarker centered={centerOnGeolocation} />
             <CenterMapButton onClick={() => this.handleCenterMap()} disabled={centerOnGeolocation} />
             <WorxMarkers {...{currentWorxId}} onMarkerClick={ worxId => this.handleWorxMarkerClick(worxId) } />
             <WorxInfoWindow currentWorxId={ currentWorxId } open={infoWindowOpen} onRequestClose={() => this.closeInfoWindow()} onRequestDetails={() => this.handleViewDetails()} />

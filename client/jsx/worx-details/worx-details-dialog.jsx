@@ -28,10 +28,6 @@ const mapMeteorToProps = ({ currentWorxId }) => {
 
 class WorxDetailsDialog extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   onCommentPropertyChanged(propertyName,newValue) {
     this.props.worx.set(propertyName,newValue);
     this.forceUpdate();
@@ -40,6 +36,23 @@ class WorxDetailsDialog extends React.Component {
   isDoneDisabled() {
     const {worx} = this.props;
     return ! worx.validate('categoryId');
+  }
+
+  handleDeleteWorx() {
+    const {worx, onRequestClose} = this.props;
+    const {displayNotification} = this.context;
+
+    if (window.confirm('Are you sure?')) {
+      worx.remove(error => {
+        if (error) {
+          console.log(error);
+          displayNotification('There was an error deleting the Worx');
+        } else {
+          displayNotification('Worx deleted.');
+        }
+      });
+      onRequestClose();
+    }
   }
 
   render() {
@@ -55,7 +68,11 @@ class WorxDetailsDialog extends React.Component {
 
       const newComment = isLoggedIn ? <NewComment worxId={currentWorxId} /> : null;
 
-      deleteButton = isOwner ? <NegativeButton label="Delete Worx" style={{float: 'left'}} /> : null;
+      deleteButton = isOwner ? <NegativeButton
+        label="Delete Worx"
+        style={{float: 'left'}}
+        onClick={ () => this.handleDeleteWorx() }
+      /> : null;
 
       dialogChildren = (
         <div>
@@ -87,6 +104,10 @@ WorxDetailsDialog.propTypes = {
   worx: PropTypes.object,
   open: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func.isRequired
+};
+
+WorxDetailsDialog.contextTypes = {
+  displayNotification: PropTypes.func.isRequired
 };
 
 export default createContainer(mapMeteorToProps, WorxDetailsDialog);

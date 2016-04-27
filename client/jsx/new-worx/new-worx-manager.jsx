@@ -98,7 +98,7 @@ class NewWorxManager extends React.Component {
   componentDidMount() {
     const {displayNotification} = this.context;
     WorxPhotos.resumable.on( 'fileAdded', file => this.saveNewWorxPhoto(file) );
-    WorxPhotos.resumable.on( 'fileSuccess', () => displayNotification('Your new Worx was successfully added.') );
+    WorxPhotos.resumable.on( 'fileSuccess', () => displayNotification('New Worx created.') );
     WorxPhotos.resumable.on( 'fileError', (_, message) => {
       this.cancelNewWorx();
       console.log(message);

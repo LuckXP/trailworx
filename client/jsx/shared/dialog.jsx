@@ -10,8 +10,6 @@ const mapMeteorToProps = () => {
 };
 
 const Dialog = ({isPortraitPhone, ...props}, {muiTheme}) => {
-  console.log(muiTheme);
-
   const phoneStyles = {
     autoDetectWindowHeight: false,
     autoScrollBodyContent: false,

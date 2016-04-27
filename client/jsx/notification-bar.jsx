@@ -28,7 +28,7 @@ class Component extends React.Component {
         {children}
         <Snackbar
           open={true}
-          autoHideDuration={5000}
+          autoHideDuration={3000}
           message={ <span style={{fontSize: 20}}>{message}</span> }
           bodyStyle={{'textAlign': 'center', fontFamily: "'Roboto', sans-serif"}}
         />
