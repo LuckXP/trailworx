@@ -2,7 +2,6 @@ import {default as React, PropTypes} from 'react'
 import {createContainer} from 'meteor/react-meteor-data'
 import Worx from '../../../models/worx'
 import {InfoWindow} from 'react-google-maps'
-import FlatButton from 'material-ui/FlatButton'
 
 const mapMeteorToProps = ({ currentWorxId }) => {
   return {

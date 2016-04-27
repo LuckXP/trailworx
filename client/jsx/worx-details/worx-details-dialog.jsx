@@ -55,6 +55,21 @@ class WorxDetailsDialog extends React.Component {
     }
   }
 
+  handleDeleteComment(comment) {
+    const {displayNotification} = this.context;
+    console.log('this is from handleDeletComment', comment);
+    if (window.confirm('Are you sure?')) {
+      comment.remove(error => {
+        if (error) {
+          console.log(error);
+          displayNotification('There was an error deleting the your comment');
+        } else {
+          displayNotification('comment deleted.');
+        }
+      });
+    }
+  }
+
   render() {
     const {currentWorxId, isLoggedIn, isOwner, worx, category, comments, photos, onRequestClose, ...props} = this.props;
 
@@ -64,7 +79,7 @@ class WorxDetailsDialog extends React.Component {
         return <PhotoCard key={photo._id} src={photo.uri} overlayText={category} width="100%" />;
       });
 
-      const commentTags = comments.map( c => <Comment key={c._id} comment={c} /> );
+      const commentTags = comments.map( c => <Comment key={c._id} comment={c} handleDeleteComment={ () => this.handleDeleteComment(c) } /> );
 
       const newComment = isLoggedIn ? <NewComment worxId={currentWorxId} /> : null;
 
