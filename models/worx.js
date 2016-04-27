@@ -61,13 +61,11 @@ export default Astro.Class({
       class: 'Comment',
       local: '_id',
       foreign: 'worxId'
-    },
-
-    getCategory: {
-      type: 'one',
-      class: 'Category',
-      local: 'categoryId',
-      foreign: '_id'
+    }
+  },
+  methods: {
+    getCategory() {
+      return Category.findOne(this.categoryId);
     }
   },
   events: {
