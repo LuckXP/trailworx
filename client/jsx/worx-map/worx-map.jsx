@@ -12,7 +12,7 @@ import NewWorxManager from './../new-worx/new-worx-manager'
 import WorxMarkers from './worx-markers'
 import WorxInfoWindow from '../worx-info/worx-info-window'
 import WorxDetailsDialog from '../worx-details/worx-details-dialog'
-
+import WaitForSubscription from '../meteor/wait-for-subscription'
 
 const mapMeteorToProps = (props) => {
   return {
@@ -102,22 +102,28 @@ class WorxMap extends React.Component {
 
     return (
       <div id="worx-map">
-        <MapLoader>
-          <GoogleMap
-            defaultZoom={15}
-            center={centerOnGeolocation ? currentLocation : undefined}
-            options={this.mapOptions()}
-            onDragstart={() => this.handleMapDrag()}
-            onClick={() => this.handleMapClick()}
-          >
-            <GeolocationMarker centered={centerOnGeolocation} />
-            <CenterMapButton onClick={() => this.handleCenterMap()} disabled={centerOnGeolocation} />
-            <WorxMarkers {...{currentWorxId}} onMarkerClick={ worxId => this.handleWorxMarkerClick(worxId) } />
-            <WorxInfoWindow currentWorxId={ currentWorxId } open={infoWindowOpen} onRequestClose={() => this.closeInfoWindow()} onRequestDetails={() => this.handleViewDetails()} />
-            <WorxDetailsDialog currentWorxId={ currentWorxId } open={detailsDialogOpen} onRequestClose={() => this.closeDetailsDialog()} />
-            <NewWorxManager onWorxCreated={newWorxId => this.handleNewWorxCreated(newWorxId)} />
-          </GoogleMap>
-        </MapLoader>
+        <WaitForSubscription subscription="categories" >
+          <WaitForSubscription subscription="worxs" >
+            <MapLoader>
+              <GoogleMap
+                defaultZoom={15}
+                center={centerOnGeolocation ? currentLocation : undefined}
+                options={this.mapOptions()}
+                onDragstart={() => this.handleMapDrag()}
+                onClick={() => this.handleMapClick()}
+              >
+                <GeolocationMarker centered={centerOnGeolocation} />
+                <CenterMapButton onClick={() => this.handleCenterMap()} disabled={centerOnGeolocation} />
+                <WaitForSubscription subscription="currentWorx" params={[currentWorxId]} >
+                  <WorxMarkers {...{currentWorxId}} onMarkerClick={ worxId => this.handleWorxMarkerClick(worxId) } />
+                  <WorxInfoWindow currentWorxId={ currentWorxId } open={infoWindowOpen} onRequestClose={() => this.closeInfoWindow()} onRequestDetails={() => this.handleViewDetails()} />
+                  <WorxDetailsDialog currentWorxId={ currentWorxId } open={detailsDialogOpen} onRequestClose={() => this.closeDetailsDialog()} />
+                </WaitForSubscription>
+                <NewWorxManager onWorxCreated={newWorxId => this.handleNewWorxCreated(newWorxId)} />
+              </GoogleMap>
+            </MapLoader>
+          </WaitForSubscription>
+        </WaitForSubscription>
       </div>
     )
   }

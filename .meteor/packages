@@ -38,7 +38,6 @@ mdg:camera
 mirrorcell:background-geolocation-plus
 
 vsivsi:file-collection
-autopublish
 insecure
 gadicohen:reactive-window
 jcheroske:responsive-media-queries
