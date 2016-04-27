@@ -5,7 +5,6 @@ import CardTitle from 'material-ui/Card/CardTitle'
 import CardText from 'material-ui/Card/CardText'
 
 const PhotoCard = ({overlayText, src, description}) => {
-  console.log('overlay text', overlayText);
   const displayCardText = description ? <CardText>{description}</CardText> : null;
   return (
     <Card>

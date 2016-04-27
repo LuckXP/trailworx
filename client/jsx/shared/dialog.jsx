@@ -25,9 +25,6 @@ const Dialog = ({isPortraitPhone, ...props}, {muiTheme}) => {
       right: 5
     },
     bodyStyle: {
-      //borderColor: 'blue',
-      //borderWidth: 1,
-      //borderStyle: 'solid',
       overflow: 'scroll',
       maxHeight: 'calc(100% - 52px)',
       padding: 0
@@ -42,6 +39,9 @@ const Dialog = ({isPortraitPhone, ...props}, {muiTheme}) => {
   const desktopStyles = {
     autoDetectWindowHeight: true,
     autoScrollBodyContent: true,
+    contentStyle: {
+      transform: 'initial'
+    }
   };
 
   return (
