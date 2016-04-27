@@ -2,21 +2,20 @@
 
 import Vote from './vote'
 
-export default Astro.Class({
+export default Astro.Class.create({
   name: 'VoteManager',
   fields: {
 
     votes: {
-      type: 'array',
-      nested: 'Vote',
+      type: [Vote],
       simpleValidator: 'required',
       default: () => []
     }
-  
+
   },
 
   methods: {
-  	getVoteCount() { 
+  	getVoteCount() {
   		return this.votes.reduce( (total, vote) => total + (vote.voteDirection ? 1 : -1), 0 );
   	},
 

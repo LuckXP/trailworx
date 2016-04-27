@@ -53,6 +53,7 @@ class NewWorxManager extends React.Component {
         this.cancelNewWorx();
         console.log(error);
         displayNotification('There was an error creating your new Worx.');
+        throw error;
         return;
       }
       onWorxCreated(id);
@@ -65,14 +66,16 @@ class NewWorxManager extends React.Component {
     const {_id: worxId} = this.state.worx;
     const {displayNotification} = this.context;
 
-    const worxPhoto = new WorxPhoto();
-
-    worxPhoto.set({
-      _id: resumableFile.uniqueIdentifier,
+    const worxPhoto = new WorxPhoto({
+      _id: new Mongo.ObjectID(resumableFile.uniqueIdentifier),
       contentType: resumableFile.file.type,
-      'metadata.userId': userId,
-      'metadata.worxId': worxId
+      metadata: {
+        userId,
+        worxId
+      }
     });
+
+    console.log(worxPhoto);
 
     worxPhoto.save(error => {
       if (error) {

@@ -19,8 +19,8 @@ const mapMeteorToProps = ({ currentWorxId }) => {
       isOwner: Meteor.userId() === worx.userId,
       worx,
       category: worx.getCategory().name,
-      comments: worx.getComments().fetch(),
-      photos: worx.getWorxPhotos().fetch()
+      comments: worx.getComments(),
+      photos: worx.getWorxPhotos()
     }
   }
   return meteorProps;

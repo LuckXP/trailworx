@@ -17,7 +17,7 @@ class NewWorxDialog extends React.Component {
 
   isDoneDisabled() {
     const {worx} = this.props;
-    return !worx || !worx.validate('categoryId');
+    return !worx || !worx.categoryId;
   }
 
   render() {

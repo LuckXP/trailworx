@@ -8,74 +8,63 @@ import LatLng from './map/lat-lng'
 import VoteManager from './shared/vote-manager'
 import Comment from './comment'
 import Category from './category'
+import WorxPhoto from './worx-photo'
 
-export default Astro.Class({
+export default Astro.Class.create({
   name: 'Worx',
   collection: Worxs,
   behaviors: ['timestamp'],
+  secured: false,
   fields: {
   	location: {
-      type: 'object',
-      nested: 'LatLng',
+      type: LatLng,
       simpleValidator: 'required'
     },
 
     categoryId: {
-      type: 'string',
+      type: String,
       simpleValidator: 'required'
     },
 
     userId: {
-      type: 'string',
+      type: String,
       simpleValidator: 'required'
     },
 
     description: {
-      type: 'string',
+      type: String,
       default: ''
     },
 
     voteManager: {
-      type: 'object',
+      type: VoteManager,
       simpleValidator: 'required',
-      nested: 'VoteManager',
       default: () => new VoteManager()
     },
 
     active: {
-      type: 'boolean',
+      type: Boolean,
       simpleValidator: 'required',
       default: true
     }
   },
-  relations: {
-    getWorxPhotos: {
-      type: 'many',
-      class: 'WorxPhoto',
-      local: '_id',
-      foreign: 'metadata.worxId'
+  methods: {
+    getCategory() {
+      return Category.findOne({_id: this.categoryId});
     },
-
-    getComments: {
-      type: 'many',
-      class: 'Comment',
-      local: '_id',
-      foreign: 'worxId'
+    getComments() {
+      return Comment.find({worxId: this._id}).fetch();
     },
-
-    getCategory: {
-      type: 'one',
-      class: 'Category',
-      local: 'categoryId',
-      foreign: '_id'
+    getWorxPhotos() {
+      return WorxPhoto.find({'metadata.worxId': this._id}).fetch();
     }
   },
   events: {
-    beforeRemove() {
-      const photos = this.getWorxPhotos().fetch();
+    beforeRemove({currentTarget: self}) {
+      const photos = self.getWorxPhotos();
       console.log(photos);
       photos.forEach(photo => WorxPhotos.remove(photo._id));
-      this.getComments().fetch().forEach(comment => comment.remove());
+      self.getComments().forEach(comment => comment.remove());
     }
   }
 });

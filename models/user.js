@@ -1,10 +1,10 @@
-export default Astro.Class({
+export default Astro.Class.create({
   name: 'User',
   collection: Meteor.users,
   fields: {
-    emails: 'array',
-    services: 'object',
-    createdAt: 'date',
-    profile: 'object'
+    emails: [String],
+    services: Object,
+    createdAt: Date,
+    profile: Object
   }
 });

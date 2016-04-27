@@ -1,17 +1,17 @@
 'use strict';
 
-export default Astro.Class({
+export default Astro.Class.create({
   name: 'Vote',
   fields: {
 
     userId: {
-    	type: 'string',
+    	type: String,
     	simpleValidator: 'required'
     },
     voteDirection: {
-    	type: 'boolean',
+    	type: Boolean,
     	simpleValidator: 'required'
     }
-  
+
   }
 });

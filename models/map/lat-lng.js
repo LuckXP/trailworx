@@ -1,15 +1,15 @@
 'use strict';
 
-export default Astro.Class({
+export default Astro.Class.create({
   name: 'LatLng',
   fields: {
     lat: {
-      type: 'number',
+      type: Number,
       default: 0,
       simpleValidator: 'required,number'
     },
     lng: {
-      type: 'number',
+      type: Number,
       default: 0,
       simpleValidator: 'required,number'
     }

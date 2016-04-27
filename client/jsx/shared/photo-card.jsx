@@ -4,7 +4,6 @@ import CardMedia from 'material-ui/Card/CardMedia'
 import CardTitle from 'material-ui/Card/CardTitle'
 
 const PhotoCard = ({overlayText, src}) => {
-  console.log('overlay text', overlayText);
   return (
     <Card>
       <CardMedia

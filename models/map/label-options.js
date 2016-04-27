@@ -2,18 +2,20 @@
 
 import LatLng from './lat-lng'
 
-export default Astro.Class({
+export default Astro.Class.create({
   name: 'LabelOptions',
   fields: {
     direction: {
-      type: 'string',
+      type: String,
       default: 'right',
       simpleValidator: 'required,string',
-      validator: Validators.choice(['left', 'right'])
+      validators: [{
+        type: 'choice',
+        param: ['left', 'right']
+      }]
     },
     offset: {
-      type: 'object',
-      nested: 'LatLng',
+      type: LatLng,
       default: () => new LatLng({lat: -18, lng: 18}),
       simpleValidator: 'required,array'
     }

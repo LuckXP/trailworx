@@ -1,46 +1,53 @@
 import {WorxPhotos} from './collections'
 
-export default Astro.Class({
+export default Astro.Class.create({
   name: 'WorxPhoto',
   collection: WorxPhotos,
+  secured: false,
   fields: {
     metadata: {
-      type: 'object',
-      simpleValidator: 'required',
+      type: Object,
       default: () => {}
     },
     uri: {
-      type: 'string',
+      type: String,
       transient: true
     },
     md5: {
-      type: 'string'
+      type: String,
+      optional: true
     },
     length: {
-      type: 'number'
+      type: Number,
+      optional: true
     },
     chunkSize: {
-      type: 'number'
+      type: Number,
+      optional: true
     },
     uploadDate: {
-      type: 'date'
+      type: Date,
+      default: new Date()
     },
     filename: {
-      type: 'string'
+      type: String,
+      optional: true
     },
     contentType: {
-      type: 'string'
+      type: String,
+      optional: true
     },
     aliases: {
-      type: 'array'
+      type: [String],
+      optional: true
     }
   },
   events: {
-    afterInit() {
-      this.set('uri', '/gridfs/worx-photos/' + this._id);
+    afterInit({currentTarget: self}) {
+      self.uri = '/gridfs/worx-photos/' + self._id;
     },
-    afterSave() {
-      this.set('uri', '/gridfs/worx-photos/' + this._id);
+    afterSave({currentTarget: self}) {
+      self.uri = '/gridfs/worx-photos/' + self._id;
     }
   }
 });

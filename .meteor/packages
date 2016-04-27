@@ -26,10 +26,7 @@ accounts-twitter
 service-configuration
 
 jagi:astronomy
-jagi:astronomy-validators
 jagi:astronomy-timestamp-behavior
-jagi:astronomy-relations
-jagi:astronomy-simple-validators
 
 react-meteor-data
 
@@ -40,5 +37,4 @@ mirrorcell:background-geolocation-plus
 vsivsi:file-collection
 autopublish
 insecure
-gadicohen:reactive-window
 jcheroske:responsive-media-queries

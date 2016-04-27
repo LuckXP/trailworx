@@ -3,7 +3,21 @@
 import {Mongo} from 'meteor/mongo';
 
 export const Worxs = new Mongo.Collection('worxs');
+
 export const Comments = new Mongo.Collection('comments');
+
+Comments.allow({
+  insert(userId) {
+    return userId != null;
+  },
+  update(userId, comment) {
+    return comment.userId === userId;
+  },
+  remove(userId, comment) {
+    return comment.userId === userId;
+  }
+});
+
 export const Categories = new Mongo.Collection('categories');
 
 export const WorxPhotos = new FileCollection('worx-photos', {

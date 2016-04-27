@@ -2,18 +2,16 @@
 
 import LatLng from './lat-lng'
 
-export default Astro.Class({
+export default Astro.Class.create({
   name: 'LatLngBounds',
   fields: {
     ne: {
-      type: 'object',
-      nested: 'LatLng',
+      type: LatLng,
       default: () => new LatLng(),
       simpleValidator: 'required,object'
     },
     sw: {
-      type: 'object',
-      nested: 'LatLng',
+      type: LatLng,
       default: () => new LatLng(),
       simpleValidator: 'required,object'
     }

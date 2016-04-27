@@ -3,18 +3,16 @@
 import LatLng from './lat-lng'
 import LatLngBounds from './lat-lng-bounds'
 
-export default Astro.Class({
+export default Astro.Class.create({
   name: 'MapOptions',
   fields: {
     center: {
-      type: 'object',
-      nested: 'LatLng',
+      type: LatLng,
       default: () => new LatLng(),
       simpleValidator: 'required,array'
     },
     maxBounds: {
-      type: 'object',
-      nested: 'LatLngBounds',
+      type: LatLngBounds,
       simpleValidator: 'object'
     }
   }
