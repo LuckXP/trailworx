@@ -1,4 +1,9 @@
 {
+  "buildOptions": {
+    // build with the debug mode on
+    "debug": true
+  },
+
   // Server authentication info
   "servers": [
     {

@@ -18,6 +18,7 @@ const mapMeteorToProps = ({ currentWorxId, onRequestClose }) => {
       meteorProps = {
         isLoggedIn: Meteor.userId() != null,
         isOwner: Meteor.userId() === worx.userId,
+        owner: Meteor.users.findOne(worx.userId),
         worx,
         category: worx.getCategory().name,
         comments: worx.getComments().fetch(),
@@ -46,7 +47,7 @@ class WorxDetailsDialog extends React.Component {
     const {worx, onRequestClose} = this.props;
     const {displayNotification} = this.context;
 
-    if (window.confirm('Are you sure?')) {
+    if (window.confirm('Are you sure you want to delete this Worx?')) {
       worx.remove(error => {
         if (error) {
           console.log(error);
@@ -62,7 +63,7 @@ class WorxDetailsDialog extends React.Component {
   handleDeleteComment(comment) {
     const {displayNotification} = this.context;
     console.log('this is from handleDeletComment', comment);
-    if (window.confirm('Are you sure?')) {
+    if (window.confirm('Are you sure you want to delete this comment?')) {
       comment.remove(error => {
         if (error) {
           console.log(error);
@@ -75,7 +76,7 @@ class WorxDetailsDialog extends React.Component {
   }
 
   render() {
-    const {currentWorxId, isLoggedIn, isOwner, worx, category, comments, photos, onRequestClose, ...props} = this.props;
+    const {currentWorxId, isLoggedIn, isOwner, worx, category, comments, photos, onRequestClose, owner, ...props} = this.props;
 
     if (!currentWorxId || !worx) {
       return null;
@@ -84,7 +85,7 @@ class WorxDetailsDialog extends React.Component {
     let dialogChildren, deleteButton;
     if (worx) {
       const photoCards = photos.map( photo => {
-        return <PhotoCard key={photo._id} src={photo.uri} overlayText={category} width="100%" description={ worx.description } />;
+        return <PhotoCard key={photo._id} src={photo.uri} overlayText={category} width="100%" description={ worx.description } creator={ owner } worx={ worx } />;
       });
 
       const commentTags = comments.map( c => <Comment key={c._id} comment={c} handleDeleteComment={ () => this.handleDeleteComment(c) } /> );
