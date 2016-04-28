@@ -15,7 +15,9 @@ class AbstractButton extends React.Component {
   }
 
   getDefaultLabelStyle() {
-    return {}
+    return {
+      top: -2.5
+    }
   }
 
   getLabelStyle() {
