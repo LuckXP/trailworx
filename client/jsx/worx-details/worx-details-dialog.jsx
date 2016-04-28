@@ -42,7 +42,7 @@ class WorxDetailsDialog extends React.Component {
     const {worx, onRequestClose} = this.props;
     const {displayNotification} = this.context;
 
-    if (window.confirm('Are you sure?')) {
+    if (window.confirm('Are you sure you want to delete this Worx?')) {
       worx.remove(error => {
         if (error) {
           console.log(error);
@@ -58,7 +58,7 @@ class WorxDetailsDialog extends React.Component {
   handleDeleteComment(comment) {
     const {displayNotification} = this.context;
     console.log('this is from handleDeletComment', comment);
-    if (window.confirm('Are you sure?')) {
+    if (window.confirm('Are you sure you want to delete this comment?')) {
       comment.remove(error => {
         if (error) {
           console.log(error);
