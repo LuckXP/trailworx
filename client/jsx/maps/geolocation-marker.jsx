@@ -21,7 +21,7 @@ const GeolocationMarker = ({position, accuracy, centered, markerOptions, circleO
     'flat': true,
     'icon': {
       'url': centered ? '/images/geolocation-marker-centered.png' : '/images/geolocation-marker.png',
-      'size': new google.maps.Size(34, 34),
+      'size': new google.maps.Size(22, 22),
       'scaledSize': new google.maps.Size(22, 22),
       'origin': new google.maps.Point(0, 0),
       'anchor': new google.maps.Point(11, 11)

@@ -27,9 +27,9 @@ class Component extends React.Component {
     const {displayNotification} = this.context;
     if(err) {
       console.log(err);
-      displayNotification('You could not be logged out.');
+      displayNotification('Error during logout.');
     } else {
-      displayNotification('You logged out.');
+      displayNotification('Logout successful.');
     }
   }
 

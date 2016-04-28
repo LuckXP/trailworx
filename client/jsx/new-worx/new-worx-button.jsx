@@ -1,4 +1,4 @@
-import React from 'react'
+import {default as React, PropTypes} from 'react'
 import {Meteor} from 'meteor/meteor'
 import {createContainer} from 'meteor/react-meteor-data'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
@@ -13,7 +13,10 @@ const mapMeteorToProps = () => {
 
 const StatelessFunction = ({loggedIn, hasLocation, onClick}) => {
   return (
-    <FloatingActionButton disabled={! loggedIn || ! hasLocation} onClick={onClick} style={{position: 'absolute', right: 20, bottom: 100, zIndex: 1}}>
+    <FloatingActionButton
+      disabled={! loggedIn || ! hasLocation}
+      onClick={onClick}
+      style={{position: 'absolute', right: 20, bottom: 100, zIndex: 1}}>
       <ImageAddAPhoto />
     </FloatingActionButton>
   )

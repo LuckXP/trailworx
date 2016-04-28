@@ -16,9 +16,9 @@ class Component extends React.Component {
     const {displayNotification} = this.context;
     if(err) {
       console.log(err);
-      displayNotification('You could not be logged in.');
+      displayNotification('Error during login.');
     } else {
-      displayNotification('You logged in.');
+      displayNotification('Login Successful.');
     }
     this.props.closeLoginDialog();
   }
