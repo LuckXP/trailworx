@@ -35,7 +35,7 @@ class Component extends React.Component {
         <Paper
           zDepth={3}
           style={{
-            marginTop: 50
+            padding: 10
           }}>
           <div>
             <LoginFacebook onClick={ () => Meteor.loginWithFacebook( (err) => this.loginCallBack(err) ) }/>
