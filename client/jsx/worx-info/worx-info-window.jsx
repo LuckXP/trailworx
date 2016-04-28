@@ -3,22 +3,29 @@ import {createContainer} from 'meteor/react-meteor-data'
 import Worx from '../../../models/worx'
 import {InfoWindow} from 'react-google-maps'
 
+
 const mapMeteorToProps = ({ currentWorxId }) => {
   return {
     worx: currentWorxId ? Worx.findOne(currentWorxId) : null
   }
 };
 
-const WorxInfoWindow = ({worx, open, onRequestDetails, onRequestClose, ...props}) => {
-  const title = worx && `Lat: ${worx.location.lat}, Lng: ${worx.location.lng}`;
-
+const WorxInfoWindow = ({worx, open, onRequestDetails, onRequestClose, currentWorxId, ...props}) => {
+  if(!currentWorxId) {
+    return null;
+  }
+  const firstPhoto = worx.getWorxPhotos().fetch()[0];
   return open && worx && <InfoWindow
     position={worx.location} {...props}
     onCloseclick={onRequestClose} >
       <div>
-        <div>{`Lat: ${worx.location.lat}, Lng: ${worx.location.lng}`}</div>
-        <div>{ worx.getCategory().name }</div>
-        <button onClick={onRequestDetails} >View Details</button>
+        <div className="infoWindowText">{ worx.getCategory().name }</div>
+        <img
+          src={ firstPhoto.uri }
+          className="img-thumbnail"
+        />
+        <br/>
+        <button className="infoWindowButton" onClick={onRequestDetails} >VIEW DETAILS</button>
     </div>
   </InfoWindow>;
 };
