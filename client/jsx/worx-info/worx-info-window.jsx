@@ -4,14 +4,18 @@ import Worx from '../../../models/worx'
 import {InfoWindow} from 'react-google-maps'
 
 
-const mapMeteorToProps = ({ currentWorxId }) => {
-  return {
-    worx: currentWorxId ? Worx.findOne(currentWorxId) : null
+const mapMeteorToProps = ({ currentWorxId, onRequestClose }) => {
+  const worx = Worx.findOne(currentWorxId);
+  if (worx) {
+    return {worx};
+  } else {
+    onRequestClose();
+    return {};
   }
 };
 
 const WorxInfoWindow = ({worx, open, onRequestDetails, onRequestClose, currentWorxId, ...props}) => {
-  if(!currentWorxId) {
+  if(!currentWorxId || !worx) {
     return null;
   }
   const firstPhoto = worx.getWorxPhotos().fetch()[0];
