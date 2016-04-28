@@ -10,17 +10,21 @@ import List from 'material-ui/List'
 import Divider from 'material-ui/Divider'
 import NewComment from '../shared/new-comment'
 
-const mapMeteorToProps = ({ currentWorxId }) => {
+const mapMeteorToProps = ({ currentWorxId, onRequestClose }) => {
   let meteorProps = {};
   if (currentWorxId) {
     const worx = Worx.findOne(currentWorxId);
-    meteorProps = {
-      isLoggedIn: Meteor.userId() != null,
-      isOwner: Meteor.userId() === worx.userId,
-      worx,
-      category: worx.getCategory().name,
-      comments: worx.getComments().fetch(),
-      photos: worx.getWorxPhotos().fetch()
+    if (worx) {
+      meteorProps = {
+        isLoggedIn: Meteor.userId() != null,
+        isOwner: Meteor.userId() === worx.userId,
+        worx,
+        category: worx.getCategory().name,
+        comments: worx.getComments().fetch(),
+        photos: worx.getWorxPhotos().fetch()
+      }
+    } else {
+      onRequestClose();
     }
   }
   return meteorProps;
@@ -72,6 +76,10 @@ class WorxDetailsDialog extends React.Component {
 
   render() {
     const {currentWorxId, isLoggedIn, isOwner, worx, category, comments, photos, onRequestClose, ...props} = this.props;
+
+    if (!currentWorxId || !worx) {
+      return null;
+    }
 
     let dialogChildren, deleteButton;
     if (worx) {
