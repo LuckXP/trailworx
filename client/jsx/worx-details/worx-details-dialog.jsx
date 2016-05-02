@@ -24,7 +24,7 @@ const mapMeteorToProps = ({ currentWorxId, onRequestClose }) => {
         photos: worx.getWorxPhotos().fetch()
       }
     } else {
-      onRequestClose();
+      //onRequestClose(); // causing infinite loop
     }
   }
   return meteorProps;

@@ -9,7 +9,7 @@ const mapMeteorToProps = ({ currentWorxId, onRequestClose }) => {
   if (worx) {
     return {worx};
   } else {
-    onRequestClose();
+    //onRequestClose(); // causing infinite loop
     return {};
   }
 };
